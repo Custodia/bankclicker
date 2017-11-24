@@ -12,7 +12,7 @@ class Background {
   update(state) {
     this.clouds.forEach(c => c.update(state));
   }
-  
+
   render(state) {
     const context = state.context;
     context.save();

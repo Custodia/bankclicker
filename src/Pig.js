@@ -7,10 +7,6 @@ export default class Pig {
     this.velocity = JUMP_VELOCITY;
   }
 
-  componentDidMount() {
-    requestAnimationFrame(() => this.update());
-  }
-
   update() {
     this.velocity -= 0.25;
     this.height += this.velocity;

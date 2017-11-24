@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Pig from './Pig';
+import Menu from './Menu';
 import Background from './Background';
 
 import './App.css';
@@ -11,7 +12,14 @@ export default class App extends Component {
     screenWidth: window.innerWidth,
     screenHeight: window.innerHeight,
     screenRatio: window.devicePixelRatio || 1,
-    context: null
+    context: null,
+    upgrades: {
+      clickPower: 1,
+      investor: {
+        level: 1,
+        count: 0
+      }
+    }
   }
 
   pig;
@@ -30,10 +38,40 @@ export default class App extends Component {
       screenWidth: window.innerWidth,
       screenHeight: window.innerHeight,
       screenRatio: window.devicePixelRatio || 1
-    }
-  )};
+    });
+  };
 
-  handleClick = event => this.setState({ score: this.state.score + 1 });
+  handleUpgradeClickPower = cost => {
+    const { score, upgrades } = this.state;
+    const { clickPower } = upgrades;
+    this.setState({
+      upgrades: {
+        ...upgrades,
+        clickPower: clickPower + 1
+      },
+      score: score - cost
+    });
+  };
+
+  handleUpgradeWorker = (type, name, cost) => {
+    const { score, upgrades } = this.state;
+    this.setState({
+      upgrades: {
+        ...upgrades,
+        [name]: {
+          ...this.state[name],
+          [type]: this.state[name][type] + 1
+        }
+      },
+      score: score - cost
+    });
+  };
+
+  handleClick = event => this.updateScoreBy(this.state.upgrades.clickPower);
+
+  updateScoreBy = amount => {
+    this.setState({ score: this.state.score + amount });
+  };
 
   update() {
     this.background.update(this.state);
@@ -46,7 +84,7 @@ export default class App extends Component {
     context.restore();
     requestAnimationFrame(() => this.update());
   }
-  
+
   render() {
     return (
       <div className="App">
@@ -58,6 +96,12 @@ export default class App extends Component {
           onClick={this.handleClick}
           width={this.state.screenWidth}
           height={this.state.screenHeight}
+        />
+        <Menu
+          onUpgradeClickPower={this.handleUpgradeClickPower}
+          onUpgradeWorker={this.handleUpgradeWorker}
+          upgrades={this.state.upgrades}
+          score={this.state.score}
         />
       </div>
     );
