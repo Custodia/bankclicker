@@ -1,10 +1,8 @@
 const JUMP_VELOCITY = 4;
 
-class Pig {
-
+export default class Pig {
   constructor(state) {
     const context = state.context;
-    //context.addHitRegion({id: "bigGreen"});
     this.height = 0;
     this.velocity = JUMP_VELOCITY;
   }
@@ -12,11 +10,13 @@ class Pig {
   componentDidMount() {
     requestAnimationFrame(() => this.update());
   }
+
   update() {
     this.velocity -= 0.25;
     this.height += this.velocity;
     if (this.height < 0) this.velocity = JUMP_VELOCITY
   }
+
   render(state) {
     const context = state.context;
     context.save();
@@ -33,5 +33,3 @@ class Pig {
     context.restore();
   }
 }
-
-export default Pig;

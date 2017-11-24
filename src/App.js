@@ -5,7 +5,7 @@ import Background from './Background';
 
 import './App.css';
 
-class App extends Component {
+export default class App extends Component {
   state = {
     score: 0,
     screenWidth: window.innerWidth,
@@ -20,11 +20,20 @@ class App extends Component {
     const context = this.canvas.getContext('2d');
     this.setState({ context: context });
     this.background = new Background({ context })
-    this.pig = new Pig({ context })
+    this.pig = new Pig({ context });
     requestAnimationFrame(() => this.update());
   }
+
+  handleResize = () => {
+    this.setState({
+      screenWidth: window.innerWidth,
+      screenHeight: window.innerHeight
+    }
+  )};
+
+  handleClick = event => this.setState({ score: this.state.score + 1 });
+
   update() {
-    console.log('updated')
     this.pig.update();
     const context = this.state.context;
     context.save();
@@ -34,17 +43,7 @@ class App extends Component {
     context.restore();
     requestAnimationFrame(() => this.update());
   }
-  handleResize = () => {
-    this.setState({
-      screenWidth: window.innerWidth,
-      screenHeight: window.innerHeight
-    }
-  )}
-  handleClick = event => {
-    if (event.region = 'pig') {
-      this.setState({ score: this.state.score + 1 });
-    }
-  }
+
   render() {
     return (
       <div className="App">
@@ -52,7 +51,7 @@ class App extends Component {
           {this.state.score}
         </div>
         <canvas
-          ref={ref => this.canvas = ref }
+          ref={ref => this.canvas = ref}
           onClick={this.handleClick}
           width={this.state.screenWidth}
           height={this.state.screenHeight}
@@ -61,5 +60,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;
