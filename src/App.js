@@ -10,6 +10,7 @@ export default class App extends Component {
     score: 0,
     screenWidth: window.innerWidth,
     screenHeight: window.innerHeight,
+    screenRatio: window.devicePixelRatio || 1,
     context: null
   }
 
@@ -27,7 +28,8 @@ export default class App extends Component {
   handleResize = () => {
     this.setState({
       screenWidth: window.innerWidth,
-      screenHeight: window.innerHeight
+      screenHeight: window.innerHeight,
+      screenRatio: window.devicePixelRatio || 1
     }
   )};
 
@@ -43,7 +45,6 @@ export default class App extends Component {
     context.restore();
     requestAnimationFrame(() => this.update());
   }
-
   render() {
     return (
       <div className="App">
