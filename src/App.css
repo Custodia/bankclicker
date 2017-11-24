@@ -4,5 +4,9 @@
 }
 
 .Score {
+  color: white;
   position: absolute;
+  top: 10%;
+  left: 50%;
+  font-size: 50px;
 }
