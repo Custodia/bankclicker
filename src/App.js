@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Pig from './Pig';
+import Background from './Background';
 
 import './App.css';
 
@@ -18,6 +19,7 @@ class App extends Component {
     window.addEventListener('resize',  this.handleResize.bind(this, false));
     const context = this.canvas.getContext('2d');
     this.setState({ context: context });
+    this.background = new Background({ context })
     this.pig = new Pig({ context })
     requestAnimationFrame(() => this.update());
   }
@@ -27,6 +29,7 @@ class App extends Component {
     const context = this.state.context;
     context.save();
     context.clearRect(0, 0, this.state.screenWidth, this.state.screenHeight);
+    this.background.render(this.state)
     this.pig.render(this.state);
     context.restore();
     requestAnimationFrame(() => this.update());
