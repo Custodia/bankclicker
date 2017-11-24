@@ -20,7 +20,7 @@ export default class App extends Component {
     window.addEventListener('resize',  this.handleResize.bind(this, false));
     const context = this.canvas.getContext('2d');
     this.setState({ context: context });
-    this.background = new Background({ context })
+    this.background = new Background(this.state)
     this.pig = new Pig({ context });
     requestAnimationFrame(() => this.update());
   }
@@ -36,6 +36,7 @@ export default class App extends Component {
   handleClick = event => this.setState({ score: this.state.score + 1 });
 
   update() {
+    this.background.update();
     this.pig.update();
     const context = this.state.context;
     context.save();
@@ -45,6 +46,7 @@ export default class App extends Component {
     context.restore();
     requestAnimationFrame(() => this.update());
   }
+  
   render() {
     return (
       <div className="App">
