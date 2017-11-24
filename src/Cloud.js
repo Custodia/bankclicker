@@ -2,31 +2,27 @@ import { randomNumBetweenExcluding, randomNumBetween } from './helpers'
 
 export default class Cloud {
   constructor(args, state) {
-    // const context = state.context;
-    console.log(state)
     this.height = randomNumBetween(10, 50);
     this.width = randomNumBetween(10, 50) * randomNumBetween(1, 5);;
     this.velocity = randomNumBetweenExcluding(-0.75, 0.75, -0.1, 0.1);
     this.xPos = randomNumBetween(0, state.screenWidth);
     this.yPos = randomNumBetween(0, state.screenHeight / 2);
-    this.destroy = false;
   }
 
   componentDidMount() {
     requestAnimationFrame(() => this.update());
   }
 
-  update() {
+  update(state) {
     this.xPos += this.velocity
-    // cloud.setAttribute('transform', 'translate('+ (xPos+=speed) +','+ yPos +')' + scaleString );
-    // if(xPos > window.screen.width + 200){
-    //     xPos = -200;
-    //     yPos = Math.random()*300;
-    // }
-    // if(xPos < -200){
-    //     xPos = window.screen.width + 200;
-    //     yPos = Math.random()*300;
-    // }
+    if(this.xPos > state.screenWidth){
+        this.xPos -= state.screenWidth + this.width;
+        this.yPos = randomNumBetween(0, state.screenHeight / 2);
+    }
+    if(this.xPos < -this.width){
+        this.xPos += state.screenWidth;
+        this.yPos = randomNumBetween(0, state.screenHeight / 2);
+    }
   }
 
   render(state) {

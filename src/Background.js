@@ -9,8 +9,8 @@ class Background {
       this.clouds.push(new Cloud({}, state))
     }
   }
-  update() {
-    this.clouds.forEach(c => c.update());
+  update(state) {
+    this.clouds.forEach(c => c.update(state));
   }
   
   render(state) {

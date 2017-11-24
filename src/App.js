@@ -36,7 +36,7 @@ export default class App extends Component {
   handleClick = event => this.setState({ score: this.state.score + 1 });
 
   update() {
-    this.background.update();
+    this.background.update(this.state);
     this.pig.update();
     const context = this.state.context;
     context.save();
