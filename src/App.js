@@ -27,7 +27,27 @@ export default class App extends Component {
         count: 0
       }
     },
-    modalEvent: null
+    modalEvent: null,
+    displayedEvent: ({
+      title: 'Made investment',
+      description: 'lorem ipsum...',
+      coinValue: Math.floor(randomNumBetween(5, 15)),
+      currencyValue: Math.floor(randomNumBetween(0, 5))
+    }),
+    events: [
+      {
+        title: 'Got interest',
+        description: 'lorem ipsum...',
+        coinValue: Math.floor(randomNumBetween(5, 15)),
+        currencyValue: Math.floor(randomNumBetween(0, 5))
+      },
+      {
+        title: 'Friend level upped',
+        description: 'lorem ipsum...',
+        coinValue: Math.floor(randomNumBetween(5, 15)),
+        currencyValue: Math.floor(randomNumBetween(0, 5))
+      }
+    ]
   }
 
   pig;
@@ -53,18 +73,6 @@ export default class App extends Component {
       screenWidth: window.innerWidth,
       screenHeight: window.innerHeight,
       screenRatio: window.devicePixelRatio || 1
-    });
-  };
-
-  handleUpgradeClickPower = cost => {
-    const { currency, upgrades } = this.state;
-    const { clickPower } = upgrades;
-    this.setState({
-      upgrades: {
-        ...upgrades,
-        clickPower: clickPower + 1
-      },
-      currency: currency - cost
     });
   };
   
@@ -121,6 +129,17 @@ export default class App extends Component {
       }));
     }
   }
+  
+  handleEventButtonClick = () => {
+    const activateModalEvent = this.state.displayedEvent;
+    const events = this.state.events;
+    const displayedEvent = events.pop();
+    this.setState({
+      displayedEvent: displayedEvent,
+      events: events,
+      activateModalEvent: displayedEvent
+    });
+  }
 
   updateScoreBy = amount => {
     this.setState({ score: this.state.score + amount });
@@ -169,7 +188,8 @@ export default class App extends Component {
           upgrades={this.state.upgrades}
           currency={this.state.currency}
           score={this.state.score}
-          activateModalEvent={e => this.setState({ activateModalEvent: e })}
+          activateModalEvent={this.handleEventButtonClick}
+          displayedEvent={this.state.displayedEvent}
         />
       </div>
     );

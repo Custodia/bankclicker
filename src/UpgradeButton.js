@@ -18,7 +18,7 @@ export default class UpgradeButton extends Component {
         style={style}
         onClick={() => onUpgrade(currencyCost, scoreCost, upgrade.id)}
       >
-        {upgrade.name}
+        <span>{upgrade.name}</span>
       </div>
     );
     return <div>test</div>

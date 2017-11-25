@@ -35,7 +35,10 @@ export default class Menu extends Component {
             onUpgrade={this.props.onUpgrade}
           />
         ))}
-        <EventBar activateEvent={this.props.activateModalEvent}/>
+        <EventBar
+          displayedEvent={this.props.displayedEvent}
+          activateModalEvent={this.props.activateModalEvent}
+        />
       </div>
     );
   }

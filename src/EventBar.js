@@ -4,41 +4,10 @@ import { randomNumBetween } from './helpers'
 import './EventBar.css';
 
 export default class EventBar extends Component {
-  state = {
-    displayedEvent: ({
-      title: 'Made investment',
-      description: 'lorem ipsum...',
-      coinValue: Math.floor(randomNumBetween(5, 15)),
-      currencyValue: Math.floor(randomNumBetween(0, 5))
-    }),
-    events: [
-      {
-        title: 'Got interest',
-        description: 'lorem ipsum...',
-        coinValue: Math.floor(randomNumBetween(5, 15)),
-        currencyValue: Math.floor(randomNumBetween(0, 5))
-      },
-      {
-        title: 'Friend level upped',
-        description: 'lorem ipsum...',
-        coinValue: Math.floor(randomNumBetween(5, 15)),
-        currencyValue: Math.floor(randomNumBetween(0, 5))
-      }
-    ]
-  }
-  handleClick() {
-    const events = this.state.events;
-    this.setState({
-      displayedEvent: events.pop(),
-      events: events
-    });
-    this.props.activateEvent(this.state.displayedEvent)
-  }
-
   render() {
-    const eventButton = this.state.displayedEvent ? <EventButton
-      event={this.state.displayedEvent}
-      onClick={() => this.handleClick()}
+    const eventButton = this.props.displayedEvent ? <EventButton
+      event={this.props.displayedEvent}
+      onClick={() => this.props.activateModalEvent()}
     /> : null;
     return (
       <div className="eventBar">
