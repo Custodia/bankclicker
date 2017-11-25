@@ -172,9 +172,9 @@ export default class App extends Component {
   };
 
   handleEventModalClick = () => {
-    const event = this.state.activateModalEvent;
+    const event = this.state.activeModalEvent;
     if (!event) return;
-    this.setState({ activateModalEvent: null, currency: this.state.currency + Math.floor(event.currencyValue) });
+    this.setState({ activeModalEvent: null, currency: this.state.currency + Math.floor(event.currencyValue) });
     const xTarget = this.state.screenWidth / 2 + 20;
     const yTarget = this.state.screenHeight / 4;
     if (event.currencyValue) {
@@ -202,7 +202,7 @@ export default class App extends Component {
     this.setState({
       displayedEvent: displayedEvent,
       events: events,
-      activateModalEvent: this.state.displayedEvent
+      activeModalEvent: this.state.displayedEvent
     });
   }
 
@@ -234,7 +234,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.activateModalEvent ? <EventModal event={this.state.activateModalEvent} onClick={this.handleEventModalClick}/> : null}
+        {this.state.activeModalEvent ? <EventModal event={this.state.activeModalEvent} onClick={this.handleEventModalClick}/> : null}
         <div className="Score">
           <span>{this.state.score}</span>
         </div>

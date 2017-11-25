@@ -20,6 +20,9 @@ export default class Tabs extends Component {
       case 'styles':
         activeTab = <StylesTab {...this.props} />;
         break;
+      case 'friends':
+        activeTab = <FriendsTab {...this.props} />;
+        break;
     }
     return (
       <div className="TabsBar">
@@ -72,6 +75,14 @@ const StylesTab = ({ styles, currency, score, onStyling }) => {
           />
         );
       })}
+    </div>
+  )
+}
+
+const FriendsTab = ({  }) => {
+  return (
+    <div className="FriendsTab">
+      WATCH FRIEND PIGGIES
     </div>
   )
 }
