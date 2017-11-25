@@ -11,11 +11,18 @@ const initialUserData = {
 const initialState = Map({
   users: Map({
     kate: Map({
-      ...initialUserData
+      score: 0,
+      currency: 0,
+      increment: 0,
+      upgrades: {},
+      styles: {}
     }),
     austin: Map({
-      ...initialUserData,
       score: 10
+      currency: 0,
+      increment: 0,
+      upgrades: {},
+      styles: {}
     })
   })
 })
