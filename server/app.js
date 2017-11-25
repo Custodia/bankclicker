@@ -32,6 +32,20 @@ app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 app.use(bodyParser.json());
 
+app.get('/api/highscore', (req, res) => {
+  const result =
+    res
+      .getStore().getState().get('users')
+      .sortBy(value => value.get('score'), (a, b) => a < b).take(10).reduce((acc, e, k) => acc.concat({
+        user: k,
+        score: e.get('score'),
+        currency: e.get('currency'),
+        increment: e.get('increment'),
+        upgrades: e.get('upgrades')
+      }), []);
+  res.send(JSON.stringify(result));
+});
+
 app.get('/api/buy', (req, res) => {
   const increment = 1
   const user = req.query.user || 'john';
