@@ -17,6 +17,9 @@ export default class Tabs extends Component {
       case 'upgrades':
         activeTab = <UpgradesTab {...this.props} />;
         break;
+      case 'styles':
+        activeTab = <StylesTab {...this.props} />;
+        break;
     }
     return (
       <div className="TabsBar">
@@ -31,9 +34,9 @@ const TabButtons = ({ onClick, selected }) => {
   return (
     <div className="tabButtons">
       <span className={selected === 'upgrades' ? 'active' : ''} onClick={() => onClick('upgrades')}>Upgrades</span>
-      <span className={selected === 'hats' ? 'active' : ''} onClick={() => onClick('hats')}>Hats</span>
-      <span className={selected === 'stuff' ? 'active' : ''} onClick={() => onClick('stuff')}>Stuff</span>
-      <span className={selected === 'things' ? 'active' : ''} onClick={() => onClick('things')}>Things</span>
+      <span className={selected === 'styles' ? 'active' : ''} onClick={() => onClick('styles')}>Styles</span>
+      <span className={selected === 'friends' ? 'active' : ''} onClick={() => onClick('friends')}>Friends</span>
+      <span className={selected === 'info' ? 'active' : ''} onClick={() => onClick('info')}>Info</span>
     </div>
   );
 }
@@ -49,6 +52,24 @@ const UpgradesTab = ({ upgrades, currency, score, onUpgrade }) => {
           currency={currency}
           score={score}
           onUpgrade={onUpgrade}
+          />
+        );
+      })}
+    </div>
+  )
+}
+
+const StylesTab = ({ styles, currency, score, onStyling }) => {
+  return (
+    <div className="StylingTab">
+      {Object.keys(styles).map(key => {
+        const style = styles[key];
+        return (
+          <UpgradeButton
+          upgrade={style}
+          currency={currency}
+          score={score}
+          onUpgrade={onStyling}
           />
         );
       })}

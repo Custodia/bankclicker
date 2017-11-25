@@ -12,8 +12,8 @@ import './App.css';
 
 export default class App extends Component {
   state = {
-    score: 0,
-    currency: 0,
+    score: 100,
+    currency: 100,
     screenWidth: window.innerWidth,
     screenHeight: window.innerHeight,
     screenRatio: window.devicePixelRatio || 1,
@@ -21,14 +21,23 @@ export default class App extends Component {
     upgrades: {
       clickPower: {
         id: 'clickPower',
-        name: '+ Power',
+        name: 'Power',
         level: 1,
         currencyCosts: [1, 2, 5, 10, 20, 50, 100, 1000],
         scoreCosts: [1, 2, 5, 10, 20, 50, 100, 1000]
       },
       clickCoins: {
         id: 'clickCoins',
-        name: '+ Coins',
+        name: 'Coins',
+        level: 1,
+        currencyCosts: [1, 2, 5, 10, 20, 50, 100, 1000],
+        scoreCosts: [1, 2, 5, 10, 20, 50, 100, 1000]
+      }
+    },
+    styles: {
+      hat: {
+        id: 'hat',
+        name: 'Hat',
         level: 1,
         currencyCosts: [1, 2, 5, 10, 20, 50, 100, 1000],
         scoreCosts: [1, 2, 5, 10, 20, 50, 100, 1000]
@@ -115,6 +124,17 @@ export default class App extends Component {
     upgrades[targetUpgrade].level += 1;
     this.setState({
       upgrades,
+      currency: currency - currencyCost,
+      score: score - scoreCost
+    });
+    this.saveGame();
+  }
+  
+  handleStyling = (currencyCost, scoreCost, targetUpgrade) => {
+    const { currency, styles, score } = this.state;
+    styles[targetUpgrade].level += 1;
+    this.setState({
+      styles,
       currency: currency - currencyCost,
       score: score - scoreCost
     });
@@ -215,6 +235,8 @@ export default class App extends Component {
           height={this.state.screenHeight}
         />
         <Menu
+          onStyling={this.handleStyling}
+          styles={this.state.styles}
           onUpgrade={this.handleUpgrade}
           upgrades={this.state.upgrades}
           currency={this.state.currency}

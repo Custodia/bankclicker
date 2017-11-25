@@ -25,6 +25,20 @@ export default class Pig {
     context.fillRect(90 + xOffset, 250 + yOffset, 10, 10);
     context.fillStyle = '#000';
     context.fillRect(220 + xOffset, 230 + yOffset, 10, 10);
+    if (state.styles.hat.level === 2) drawCap(context, xOffset, yOffset, '#0973ff');
+    if (state.styles.hat.level > 2) drawTophat(context, xOffset, yOffset, '#323232', state.styles.hat.level)
     context.restore();
   }
+}
+
+const drawCap = (context, xOffset, yOffset, color) => {
+  context.fillStyle = color;
+  context.fillRect(200 + xOffset, 200 + yOffset, 70, 10);
+  context.fillRect(200 + xOffset, 200 + yOffset, 50, -15);
+}
+
+const drawTophat = (context, xOffset, yOffset, color, height) => {
+  context.fillStyle = color;
+  context.fillRect(190 + xOffset, 190 + yOffset, 70, 10);
+  context.fillRect(200 + xOffset, 200 + yOffset, 50, - height * 10);
 }

@@ -19,7 +19,7 @@ export default class UpgradeButton extends Component {
         style={style}
         onClick={onClick}
       >
-        <span>{upgrade.name}</span>
+        <span>{upgrade.name + ` ${upgrade.level} lvl`}</span>
       </div>
     );
   }
