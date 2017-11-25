@@ -1,6 +1,7 @@
 import React from 'react';
 
 import BankSection from './BankSection';
+import { randomNumBetween } from '../helpers';
 
 import './Bank.css';
 import './BankLoader.css';
@@ -8,10 +9,99 @@ import './BankLoader.css';
 const CLIENT_ID = 'e90bd9a2-d6af-4d88-b5e7-adfb0f2a6467';
 const SECRET = 'R3cX0rR4eU3fK8nX0vB0oG6pI7nI6hL7tS5jS8fK5jB8gJ8hA8';
 
+const MOCK_INVESTMENTS = [
+  {
+    name: 'Nimi',
+    purchaseValue: 'Ostohinta',
+    value: 'Keskihinta',
+    count: 'Omistus'
+  },
+  {
+    name: 'Arctech',
+    purchaseValue: randomNumBetween(60, 130),
+    value: randomNumBetween(80, 120),
+    count: randomNumBetween(5, 50)
+  },{
+    name: 'Google',
+    purchaseValue: randomNumBetween(300, 530),
+    value: randomNumBetween(380, 700),
+    count: randomNumBetween(1, 25)
+  },{
+    name: 'Ramirent',
+    purchaseValue: randomNumBetween(20, 50),
+    value: randomNumBetween(30, 90),
+    count: randomNumBetween(20, 90)
+  },{
+    name: 'Walmart',
+    purchaseValue: randomNumBetween(100, 130),
+    value: randomNumBetween(110, 200),
+    count: randomNumBetween(10, 30)
+  },{
+    name: 'Citigroup',
+    purchaseValue: randomNumBetween(20, 100),
+    value: randomNumBetween(80, 250),
+    count: randomNumBetween(10, 30)
+  },{
+    name: 'Apple',
+    purchaseValue: randomNumBetween(100, 600),
+    value: randomNumBetween(350, 900),
+    count: randomNumBetween(1, 30)
+  },{
+    name: 'SSAB B',
+    purchaseValue: randomNumBetween(40, 120),
+    value: randomNumBetween(60, 200),
+    count: randomNumBetween(4, 30)
+  },{
+    name: 'Pöyry',
+    purchaseValue: randomNumBetween(20, 130),
+    value: randomNumBetween(40, 180),
+    count: randomNumBetween(10, 100)
+  },
+];
+
+const Loading = (props) => {
+  if (props.loading) {
+    return (
+      <div className="BankListItem">
+        <div className="loader">
+          Loading...
+        </div>
+      </div>
+    );
+  } else {
+    return props.children;
+  }
+};
+
+const Modal = (props) => {
+  if (!props.isOpen) return null;
+  return (
+    <div>
+      <div onClick={props.onClose} className="BankModalBackground" />
+      <div className="BankModalContainer">
+        {props.children}
+      </div>
+    </div>
+  );
+};
+
+const ListItem = (props) => {
+  const { index, children } = props;
+  let className = "BankListItem";
+  if (index === 0) className = "BankListItemFirst";
+  return (
+    <div className={className}>
+      {children}
+    </div>
+  );
+};
+
 export default class Bank extends React.Component {
   state = {
     payments: [],
-    loading: true
+    investments: MOCK_INVESTMENTS,
+    loading: true,
+    modalInvestmentIndex: 0
   };
 
   componentDidMount() {
@@ -44,7 +134,26 @@ export default class Bank extends React.Component {
             }
           })
           .then(response => response.json())
-          .then(data => this.setState({ payments: data.response.payments, loading: false }))
+          .then(data => this.setState({
+            payments: [
+              {
+                amount: 'Määrä',
+                creditor: {
+                  account: {
+                    value: 'Tililtä'
+                  },
+                  message: 'Viesti',
+                  name: 'Nimi'
+                },
+                debtor: {
+                  _accountId: 'Tilille'
+                },
+                paymentStatus: 'Status'
+              },
+              ...data.response.payments
+            ],
+            loading: false
+          }))
         });
       })
   }
@@ -52,6 +161,10 @@ export default class Bank extends React.Component {
   handleBuy = () => {
     fetch('./api/buy')
   }
+
+  handleOpenModal = index => this.setState({ modalInvestmentIndex: index });
+
+  handleCloseModal = () => this.setState({ modalInvestmentIndex: 0 });
 
   renderButton(text, i) {
     const selected = text === 'Verkkopankki';
@@ -62,49 +175,114 @@ export default class Bank extends React.Component {
     );
   }
 
-  renderPayment(payment) {
-    const { amount, } = payment;
+  renderPayment(payment, index) {
+    const { amount, creditor, debtor } = payment;
     return (
-      <div className="BankPayment">
-        <span className="BankPaymentAmount">{amount + ' €'}</span>
-        <span className="BankPaymentName">{payment.creditor.name}</span>
-      </div>
+      <ListItem key={index} index={index}>
+        <span style={{ flex: 2 }}>{creditor.account.value}</span>
+        <span style={{ flex: 2 }}>{debtor._accountId.split('-')[0]}</span>
+        <span style={{ flex: 1 }}>
+          {
+            index === 0 ? amount : amount + ' €'
+          }
+        </span>
+        <span style={{ flex: 1 }}>{creditor.name}</span>
+      </ListItem>
     );
   }
 
-  renderPayments() {
-    if (this.state.loading) {
-      return (
-        <div className="BankLoading">
-          <div className="loader">
-            Loading...
-          </div>
-        </div>
-      );
-    }
-    return this.state.payments.slice(0,10).map(payment => this.renderPayment(payment));
+  renderInvestment(investment, index) {
+    const { name, purchaseValue, value, count } = investment;
+    return (
+      <ListItem key={index} index={index}>
+        <span style={{ flex: 2 }}>{name}</span>
+        <span style={{ flex: 1 }}>
+          {
+            index === 0
+            ? count
+            : Math.round(count)
+          }
+        </span>
+        <span style={{ flex: 2 }}>
+          {
+            index === 0
+            ? value
+            : Math.round(value * 100) / 100 + ' €'
+          }
+        </span>
+        <span style={{ flex: 2 }}>
+          {
+            index === 0
+            ? purchaseValue
+            : Math.round(purchaseValue * 100) / 100 + ' €'
+          }
+        </span>
+        <span style={{ flex: 2 }}>
+          {
+            index === 0
+            ? 'Arvonmuutos %'
+            : Math.round(((value - purchaseValue) / purchaseValue) * 10000) / 100 + ' %'
+          }
+        </span>
+        <span style={{ flex: 2 }}>
+          {
+            index === 0
+            ? 'Arvonmuutos €'
+            : Math.round((value - purchaseValue) * count * 100) / 100 + ' €'
+          }
+        </span>
+        <span style={{ flex: 2 }}>
+          {
+            index === 0
+            ? 'Yhteensä'
+            : Math.round(count) * Math.round(value * 100) / 100 + ' €'
+          }
+        </span>
+        <span style={{ flex: 1 }}>
+          {
+            index > 0 && <div className="BankBuyButton" onClick={() => this.handleOpenModal(index)}>Osta</div>
+          }
+        </span>
+      </ListItem>
+    );
   }
 
   renderPaymentCount() {
-    const { length } = this.state.payments;
-    if (length === 0) return null;
-    else return <div className="BankPaymentShowing">{'Showing 10 out of ' + length}</div>
+    return <div className="BankPaymentShowing">{'Näytetään 10 / ' + this.state.payments.length}</div>
+  }
+
+  renderModalContent() {
+    const investment = this.state.investments[this.state.modalInvestmentIndex];
+    const { name, value, purchaseValue, count } = investment;
+    return (
+      <div>
+        <div className="BankModalTitle">{name}</div>
+        <div className="BankModalBuyButton">Osta</div>
+      </div>
+    );
   }
 
   render() {
     const buttonTexts = ['Verkkopankki', 'Viestit', 'Asetukset'];
     return (
       <div className="Bank">
+        <Modal onClose={this.handleCloseModal} isOpen={this.state.modalInvestmentIndex}>
+          {this.renderModalContent()}
+        </Modal>
         <div className="BankHeader">
           {buttonTexts.map((text, i) => this.renderButton(text, i))}
         </div>
         <div className="BankContainer">
           <BankSection title="Tilitapahtumat">
-            {this.renderPayments()}
-            {this.renderPaymentCount()}
+            <Loading loading={this.state.loading}>
+              {this.state.payments.slice(0,10).map((payment, i) => this.renderPayment(payment, i))}
+              {this.renderPaymentCount()}
+            </Loading>
           </BankSection>
           <BankSection title="Arvo-osuustili">
-            <div onClick={this.handleBuy}>BUY BUY BUY</div>
+            <Loading loading={this.state.loading}>
+              {this.state.investments.map((investment, i) => this.renderInvestment(investment, i))}
+            </Loading>
           </BankSection>
         </div>
       </div>

@@ -3,7 +3,7 @@
 }
 
 .BankHeader {
-  height: 100px;
+  height: 30px;
   width: 100%;
   display: flex;
   background-color: #77bdfd;
@@ -14,9 +14,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
-  width: 180px;
-  padding: 16px;
+  font-size: 14px;
+  width: 140px;
   border-right: 1px solid #5d90fd;
   transition: all 0.15s;
 }
@@ -38,14 +37,27 @@
   font-family: sans-serif;
 }
 
-.BankPayment, .BankLoading {
-  width: calc(100% - 20px);
+.BankListItem, .BankListItemFirst {
+  width: calc(100% - 28px);
   margin: 0 8px;
-  padding: 2px;
+  padding: 3px 6px;
   border-bottom: solid 1px #ddd;
   background-color: white;
   display: flex;
   justify-content: space-between;
+  font-size: 12px;
+}
+
+.BankListItemFirst {
+  font-weight: bold;
+}
+
+.BankListItem > span, .BankListItemFirst > span {
+  min-width: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .BankPaymentShowing {
@@ -55,4 +67,65 @@
   margin-top: 4px;
   color: #444;
   font-style: italic;
+}
+
+.BankBuyButton {
+  display: flex;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  background-color: #77bdfd;
+  padding: 1px 2px;
+  cursor: pointer;
+}
+
+.BankBuyButton:hover {
+  background-color: #7cc0f2;
+}
+
+.BankBuyButton:active {
+  background-color: #60a6e7;
+}
+
+.BankModalBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  height: 100%;
+}
+
+.BankModalContainer {
+  position: absolute;
+  top: calc(50% - 150px);
+  left: calc(50% - 250px);
+  width: 500px;
+  background-color: white;
+  border-radius: 2px;
+  height: 300px;
+  font-family: sans-serif;
+  padding: 4px;
+}
+
+.BankModalTitle {
+  display: flex;
+  font-size: 24px;
+  justify-content: center;
+  border-bottom: 1px solid #dfdfdf;
+}
+
+.BankModalBuyButton {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  border-radius: 2px;
+  background-color: #ddd;
+  padding: 4px 12px;
+  cursor: pointer;
+}
+
+.BankModalBuyButton:hover {
+  background-color: #e2e2e2;
 }
