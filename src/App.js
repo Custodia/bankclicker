@@ -94,17 +94,15 @@ export default class App extends Component {
   handleClick = (event) => {
     for(var i = 0; i < this.state.upgrades.clickCoins; i++) {
       this.coins.push(new Coin({
-        lifeSpan: randomNumBetween(60, 100),
-          size: 5 + this.state.upgrades.clickPower,
-          position: {
-            x: event.nativeEvent.clientX,
-            y: event.nativeEvent.clientY
-          },
-          velocity: {
-            x: event.nativeEvent.clientX <= this.state.screenWidth / 2 ?
-              randomNumBetween(0, 5) : randomNumBetween(-5, 0),
-            y: randomNumBetween(-10, -5)
-          }
+        size: 5 + this.state.upgrades.clickPower,
+        position: {
+          x: event.nativeEvent.clientX,
+          y: event.nativeEvent.clientY
+        },
+        velocity: {
+          x: randomNumBetween(-10, 10),
+          y: randomNumBetween(-20, -10)
+        }
       }))
     }
   };
@@ -120,16 +118,15 @@ export default class App extends Component {
     }
     for(var i = 0; i < event.coinValue; i++) {
       this.coins.push(new Coin({
-        lifeSpan: randomNumBetween(60, 100),
-          size: 5 + this.state.upgrades.clickPower,
-          position: {
-            x: xTarget,
-            y: yTarget
-          },
-          velocity: {
-            x: randomNumBetween(-10, 10),
-            y: randomNumBetween(-20, 0)
-          }
+        size: 5 + this.state.upgrades.clickPower,
+        position: {
+          x: xTarget,
+          y: yTarget
+        },
+        velocity: {
+          x: randomNumBetween(-10, 10),
+          y: randomNumBetween(-30, -20)
+        }
       }));
     }
   }
