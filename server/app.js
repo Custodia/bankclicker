@@ -46,7 +46,7 @@ app.get('/api', (req, res) => {
     user,
     increment
   });
-  res.send(JSON.stringify({currency: userData.get('currency') + increment, increment}));
+  res.send(JSON.stringify({currency: userData.get('currency'), increment}));
 });
 
 // Always return the main index.html, so react-router render the route in the client
