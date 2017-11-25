@@ -10,4 +10,4 @@ e90bd9a2-d6af-4d88-b5e7-adfb0f2a6467
 
 > Client secret:
 
-pS0nE7xO3uG3bP4pL7dP1hA8qB8iT2uA8bI1iU6nU6vT5eN8uI
+R3cX0rR4eU3fK8nX0vB0oG6pI7nI6hL7tS5jS8fK5jB8gJ8hA8

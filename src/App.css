@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   user-select: none;
+  font-family: PixelFont;
 }
 
 .Score {

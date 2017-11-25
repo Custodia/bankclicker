@@ -6,8 +6,15 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'BankFont';
+    src: url('./fonts/bank_font/american_captain_patrius_02_fre-webfont.woff2') format('woff2'),
+         url('./fonts/bank_font/american_captain_patrius_02_fre-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: PixelFont;
 }
