@@ -90,7 +90,7 @@ export default class App extends Component {
   };
 
   handleCurrencyClick = event => this.setState({ currency: this.state.currency + 1 });
-  
+
   handleEventModalClick = () => {
     const event = this.state.activateModalEvent;
     if (!event) return;
