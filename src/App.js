@@ -102,7 +102,6 @@ export default class App extends Component {
     context.clearRect(0, 0, this.state.screenWidth, this.state.screenHeight);
     // Render
     this.background.render(this.state)
-    this.pig.render(this.state);
     this.coins.forEach(coin => {
       if (coin.delete) {
         this.updateScoreBy(this.state.upgrades.clickPower);
@@ -110,6 +109,7 @@ export default class App extends Component {
       }
     });
     this.coins.forEach(c => c.render(this.state))
+    this.pig.render(this.state);
     context.restore();
     requestAnimationFrame(() => this.update());
   }
