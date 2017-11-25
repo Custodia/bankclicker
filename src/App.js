@@ -90,6 +90,10 @@ export default class App extends Component {
   };
 
   handleCurrencyClick = event => this.setState({ currency: this.state.currency + 1 });
+  
+  handleEventModalClick = () => {
+    this.setState({ activateModalEvent: null })
+  }
 
   updateScoreBy = amount => {
     this.setState({ score: this.state.score + amount });
@@ -119,7 +123,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.activateModalEvent ? <EventModal /> : null}
+        {this.state.activateModalEvent ? <EventModal event={this.state.activateModalEvent} onClick={this.handleEventModalClick}/> : null}
         <div className="Score">
           <span>{this.state.score}</span>
         </div>

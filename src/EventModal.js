@@ -4,8 +4,9 @@ import './EventModal.css';
 
 const EventModal = ({ onClick, event }) => {
   return (
-    <div className="eventModal">
-      <h1>Event</h1>
+    <div className="eventModal" onClick={onClick}>
+      <h1>{event.title}</h1>
+      <span>{event.description}</span>
     </div>
   );
 }
