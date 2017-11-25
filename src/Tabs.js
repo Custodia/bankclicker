@@ -7,32 +7,33 @@ export default class Tabs extends Component {
   state = {
     selectedTab: 'upgrades'
   }
+  handleTabSelect(name) {
+    this.setState({ selectedTab: name })
+  }
+  
   render() {
-    // let activeTab;
-    // switch (this.state.selectedTab) {
-    //   case 'upgrades':
-    //     activeTab = <UpgradeTab {...props} />;
-    //     break;
-    // }
-    // const activeTab = null; 
-    // return (
-    //   <div className="TabButtons">
-    //     <span className="TabButton">Upgrades</span>
-    //   </div>
-    // );
+    let activeTab = <div />;
+    switch (this.state.selectedTab) {
+      case 'upgrades':
+        activeTab = <UpgradesTab {...this.props} />;
+        break;
+    }
     return (
       <div className="TabsBar">
-        <span className="UpgradeTitle">Upgrades</span>
-        <UpgradesTab {...this.props} />
+        <TabButtons onClick={this.handleTabSelect.bind(this)} selected={this.state.selectedTab} />
+        {activeTab}
       </div>
     )
   }
 }
 
-const TabButtons = ({ activateTab, selectedTab }) => {
+const TabButtons = ({ onClick, selected }) => {
   return (
     <div className="tabButtons">
-      <span className="tabButton">Upgrades</span>
+      <span className={selected === 'upgrades' ? 'active' : ''} onClick={() => onClick('upgrades')}>Upgrades</span>
+      <span className={selected === 'hats' ? 'active' : ''} onClick={() => onClick('hats')}>Hats</span>
+      <span className={selected === 'stuff' ? 'active' : ''} onClick={() => onClick('stuff')}>Stuff</span>
+      <span className={selected === 'things' ? 'active' : ''} onClick={() => onClick('things')}>Things</span>
     </div>
   );
 }

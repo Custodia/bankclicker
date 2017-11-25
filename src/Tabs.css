@@ -1,0 +1,13 @@
+.tabButtons {
+  color: rgba(0, 0, 0, 0.5);
+  background-color: #604c3a;
+}
+
+.tabButtons > span {
+  padding: 5px;
+}
+
+.active {
+  color: black;
+  background-color: #a28263;
+}
