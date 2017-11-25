@@ -137,7 +137,7 @@ export default class App extends Component {
     this.setState({
       displayedEvent: displayedEvent,
       events: events,
-      activateModalEvent: displayedEvent
+      activateModalEvent: this.state.displayedEvent
     });
   }
 
