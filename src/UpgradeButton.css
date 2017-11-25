@@ -1,7 +1,7 @@
 .upgrade-button {
   display: flex;
   width: calc(100% - 16px * 2);
-  height: 40px;
+  height: 20px;
   background-color: #b99e7f;
   margin: 16px;
   justify-content: center;

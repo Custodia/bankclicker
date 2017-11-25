@@ -21,6 +21,5 @@ export default class UpgradeButton extends Component {
         <span>{upgrade.name}</span>
       </div>
     );
-    return <div>test</div>
   }
 }

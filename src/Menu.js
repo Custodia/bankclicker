@@ -9,13 +9,13 @@ import './Menu.css';
 const upgrades = [
   {
     id: 'clickPower',
-    name: 'Click Power',
+    name: '+ Power',
     currencyCosts: [1, 2, 5, 10, 20, 50, 100, 1000],
     scoreCosts: [1, 2, 5, 10, 20, 50, 100, 1000]
   },
   {
     id: 'clickCoins',
-    name: 'Click Coins',
+    name: '+ Coins',
     currencyCosts: [1, 2, 5, 10, 20, 50, 100, 1000],
     scoreCosts: [1, 2, 5, 10, 20, 50, 100, 1000]
   }
