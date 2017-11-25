@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import { API_URL } from './constants';
-
 export default class Highscores extends Component {
   componentDidMount() {
     fetch("./highscore").then(response => {

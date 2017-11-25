@@ -1,7 +1,6 @@
 import React from 'react';
 
 import BankSection from './BankSection';
-import { API_URL } from '../constants';
 
 import './Bank.css';
 import './BankLoader.css';

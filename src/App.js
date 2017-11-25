@@ -6,7 +6,6 @@ import Background from './Background';
 import Coin from './Coin';
 import Modal from './Modal';
 import { randomNumBetween } from './helpers'
-import { API_URL } from './constants';
 
 import './App.css';
 
