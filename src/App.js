@@ -96,6 +96,9 @@ export default class App extends Component {
     this.setState({ activateModalEvent: null, currency: this.state.currency + Math.floor(event.currencyValue) });
     const xTarget = this.state.screenWidth / 2 + 20;
     const yTarget = this.state.screenHeight / 4;
+    if (event.currencyValue) {
+      this.setState({ currency: this.state.currency + event.currencyValue });
+    }
     for(var i = 0; i < event.coinValue; i++) {
       this.coins.push(new Coin({
         lifeSpan: randomNumBetween(60, 100),

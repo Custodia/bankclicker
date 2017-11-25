@@ -34,7 +34,7 @@ export default class EventBar extends Component {
     });
     this.props.activateEvent(this.state.displayedEvent)
   }
-  
+
   render() {
     const eventButton = this.state.displayedEvent ? <EventButton
       event={this.state.displayedEvent}
