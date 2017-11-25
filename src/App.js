@@ -20,11 +20,19 @@ export default class App extends Component {
     screenRatio: window.devicePixelRatio || 1,
     context: null,
     upgrades: {
-      clickPower: 1,
-      clickCoins: 1,
-      investor: {
+      clickPower: {
+        id: 'clickPower',
+        name: '+ Power',
         level: 1,
-        count: 0
+        currencyCosts: [1, 2, 5, 10, 20, 50, 100, 1000],
+        scoreCosts: [1, 2, 5, 10, 20, 50, 100, 1000]
+      },
+      clickCoins: {
+        id: 'clickCoins',
+        name: '+ Coins',
+        level: 1,
+        currencyCosts: [1, 2, 5, 10, 20, 50, 100, 1000],
+        scoreCosts: [1, 2, 5, 10, 20, 50, 100, 1000]
       }
     },
     modalEvent: null,
@@ -92,9 +100,9 @@ export default class App extends Component {
   }
 
   handleClick = (event) => {
-    for(var i = 0; i < this.state.upgrades.clickCoins; i++) {
+    for(var i = 0; i < this.state.upgrades.clickCoins.level; i++) {
       this.coins.push(new Coin({
-        size: 5 + this.state.upgrades.clickPower,
+        size: 5 + this.state.upgrades.clickPower.level,
         position: {
           x: event.nativeEvent.clientX,
           y: event.nativeEvent.clientY
@@ -118,7 +126,7 @@ export default class App extends Component {
     }
     for(var i = 0; i < event.coinValue; i++) {
       this.coins.push(new Coin({
-        size: 5 + this.state.upgrades.clickPower,
+        size: 5 + this.state.upgrades.clickPower.level,
         position: {
           x: xTarget,
           y: yTarget
@@ -156,7 +164,7 @@ export default class App extends Component {
     this.background.render(this.state)
     this.coins.forEach(coin => {
       if (coin.delete) {
-        this.updateScoreBy(this.state.upgrades.clickPower);
+        this.updateScoreBy(this.state.upgrades.clickPower.level);
         this.coins = this.coins.filter(c => c !== coin);
       }
     });

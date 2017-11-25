@@ -4,9 +4,9 @@ import './UpgradeButton.css';
 
 export default class UpgradeButton extends Component {
   render() {
-    const {upgrade, power, onUpgrade, currency, score} = this.props;
-    const scoreCost = upgrade.scoreCosts[power - 1];
-    const currencyCost = upgrade.currencyCosts[power - 1];
+    const {upgrade, onUpgrade, currency, score} = this.props;
+    const scoreCost = upgrade.scoreCosts[upgrade.level - 1];
+    const currencyCost = upgrade.currencyCosts[upgrade.level - 1];
     const isAffordable = currency >= currencyCost && score >= scoreCost;
     let style = {};
     if (!isAffordable) {
