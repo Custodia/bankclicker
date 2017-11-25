@@ -12,7 +12,7 @@ import './App.css';
 export default class App extends Component {
   state = {
     score: 100,
-    currency: 100,
+    currency: 100000,
     screenWidth: window.innerWidth,
     screenHeight: window.innerHeight,
     screenRatio: window.devicePixelRatio || 1,
@@ -56,6 +56,50 @@ export default class App extends Component {
         scoreCosts: [1, 2, 5, 10, 20, 50, 100, 1000]
       }
     },
+    friends: [
+      {
+        name: 'Kate',
+        styles: {
+          hat: {
+            level: 1
+          },
+          cigar: {
+            level: 1,
+          },
+          pants: {
+            level: 1,
+          }
+        }
+      },
+      {
+        name: 'Kane',
+        styles: {
+          hat: {
+            level: 2
+          },
+          cigar: {
+            level: 2,
+          },
+          pants: {
+            level: 2,
+          }
+        }
+      },
+      {
+        name: 'Billy',
+        styles: {
+          hat: {
+            level: 3
+          },
+          cigar: {
+            level: 3,
+          },
+          pants: {
+            level: 3,
+          }
+        }
+      }
+    ],
     friendsModalOpen: false,
     modalEvent: null,
     displayedEvent: ({
@@ -239,7 +283,7 @@ export default class App extends Component {
 
   render() {
     const modal = (this.state.activeModalEvent && <Modal event={this.state.activeModalEvent} onClose={this.handleEventModalClick}/>) ||
-      (this.state.friendsModalOpen && <Modal onClose={() => this.setState({ friendsModalOpen: false })}/>);
+      (this.state.friendsModalOpen && <Modal friends={this.state.friends} onClose={() => this.setState({ friendsModalOpen: false })}/>);
     return (
       <div className="App">
         {modal}

@@ -16,8 +16,8 @@ export default class Pig {
     const context = state.context;
     context.save();
     context.fillStyle = '#f99';
-    const xOffset = state.screenWidth / 2 - 150;
-    const yOffset = - this.height + state.screenHeight / 2 - 200;
+    const xOffset = state.screenWidth ? (state.screenWidth / 2 - 150) : -50;
+    const yOffset = - this.height + (state.screenHeight ? (state.screenHeight / 2 - 200) : -100);
     context.fillRect(100 + xOffset, 200 + yOffset, 150, 100);
     context.fillRect(100 + xOffset, 300 + yOffset, 10, 10);
     context.fillRect(240 + xOffset, 300 + yOffset, 10, 10);
