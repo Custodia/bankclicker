@@ -32,20 +32,20 @@ export default class App extends Component {
       title: 'Made investment',
       description: 'lorem ipsum...',
       coinValue: Math.floor(randomNumBetween(5, 15)),
-      currencyValue: Math.floor(randomNumBetween(0, 5))
+      currencyValue: 0
     }),
     events: [
       {
         title: 'Got interest',
         description: 'lorem ipsum...',
         coinValue: Math.floor(randomNumBetween(5, 15)),
-        currencyValue: Math.floor(randomNumBetween(0, 5))
+        currencyValue: 0
       },
       {
         title: 'Friend level upped',
         description: 'lorem ipsum...',
         coinValue: Math.floor(randomNumBetween(5, 15)),
-        currencyValue: Math.floor(randomNumBetween(0, 5))
+        currencyValue: 0
       }
     ]
   }
