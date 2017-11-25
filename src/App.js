@@ -147,8 +147,8 @@ export default class App extends Component {
           <span>{this.state.score}</span>
         </div>
         <div className="Currency" onClick={this.handleCurrencyClick}>
-          <span className="InfoText">Currency: </span>
-          <span>{this.state.currency}</span>
+          <span className="CurrencyText">currency</span>
+          <span className="CurrencyValue">{this.state.currency}</span>
         </div>
         <canvas
           ref={ref => this.canvas = ref}

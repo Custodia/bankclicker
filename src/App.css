@@ -14,14 +14,18 @@
 
 .Currency {
   position: absolute;
-  top: 20%;
+  top: 2%;
   right: 5%;
   font-size: 30px;
   display: flex;
   flex-direction: column;
 }
 
-.InfoText {
+.CurrencyText {
   margin-bottom: 10px;
-  font-size: 20px;
+  font-size: 15px;
+}
+
+.CurrencyValue {
+  text-align: right;
 }
