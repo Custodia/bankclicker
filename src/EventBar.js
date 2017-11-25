@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 
-import { randomNumBetween } from './helpers'
 import './EventBar.css';
 
 export default class EventBar extends Component {

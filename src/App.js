@@ -78,7 +78,6 @@ export default class App extends Component {
   
   handleUpgrade = (currencyCost, scoreCost, targetUpgrade) => {
     const { currency, upgrades, score } = this.state;
-    const targetUpgradeLevel = upgrades[targetUpgrade];
     upgrades[targetUpgrade] += 1;
     this.setState({
       upgrades,
@@ -131,7 +130,6 @@ export default class App extends Component {
   }
   
   handleEventButtonClick = () => {
-    const activateModalEvent = this.state.displayedEvent;
     const events = this.state.events;
     const displayedEvent = events.pop();
     this.setState({
