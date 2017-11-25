@@ -158,7 +158,7 @@ export default class Bank extends React.Component {
       })
   }
 
-  handleBuy = () => {
+  handleBuy = index => {
     fetch('./api/buy')
     this.handleOpenModal(index);
   }
