@@ -12,11 +12,12 @@ export default class UpgradeButton extends Component {
     if (!isAffordable) {
       style.color = "#7a7a7a";
     }
+    const onClick = isAffordable ? () => onUpgrade(currencyCost, scoreCost, upgrade.id) : null;
     return (
       <div
         className="upgrade-button"
         style={style}
-        onClick={() => onUpgrade(currencyCost, scoreCost, upgrade.id)}
+        onClick={onClick}
       >
         <span>{upgrade.name}</span>
       </div>
