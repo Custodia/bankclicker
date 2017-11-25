@@ -4,7 +4,7 @@ import Pig from './Pig';
 import Menu from './Menu';
 import Background from './Background';
 import Coin from './Coin';
-import EventModal from './EventModal';
+import Modal from './Modal';
 import { randomNumBetween } from './helpers'
 import { API_URL } from './constants';
 
@@ -57,6 +57,7 @@ export default class App extends Component {
         scoreCosts: [1, 2, 5, 10, 20, 50, 100, 1000]
       }
     },
+    friendsModalOpen: false,
     modalEvent: null,
     displayedEvent: ({
       title: 'Made investment',
@@ -205,6 +206,10 @@ export default class App extends Component {
       activeModalEvent: this.state.displayedEvent
     });
   }
+  
+  handleFriendsModalOpen = () => {
+    this.setState({ friendsModalOpen: true });
+  }
 
   updateScoreBy = amount => {
     this.setState({ score: this.state.score + amount });
@@ -232,9 +237,11 @@ export default class App extends Component {
   }
 
   render() {
+    const modal = (this.state.activeModalEvent && <Modal event={this.state.activeModalEvent} onClose={this.handleEventModalClick}/>) ||
+      (this.state.friendsModalOpen && <Modal onClose={() => this.setState({ friendsModalOpen: false })}/>);
     return (
       <div className="App">
-        {this.state.activeModalEvent ? <EventModal event={this.state.activeModalEvent} onClick={this.handleEventModalClick}/> : null}
+        {modal}
         <div className="Score">
           <span>{this.state.score}</span>
         </div>
@@ -257,6 +264,7 @@ export default class App extends Component {
           score={this.state.score}
           activateModalEvent={this.handleEventButtonClick}
           displayedEvent={this.state.displayedEvent}
+          openFriendsModal={this.handleFriendsModalOpen}
         />
       </div>
     );

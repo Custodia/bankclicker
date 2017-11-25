@@ -79,10 +79,10 @@ const StylesTab = ({ styles, currency, score, onStyling }) => {
   )
 }
 
-const FriendsTab = ({  }) => {
+const FriendsTab = ({ openFriendsModal }) => {
   return (
     <div className="FriendsTab">
-      WATCH FRIEND PIGGIES
+      <span className="FriendsModalButton" onClick={openFriendsModal}>See Friend Piggies</span>
     </div>
   )
 }

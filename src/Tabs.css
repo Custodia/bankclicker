@@ -12,6 +12,12 @@
   background-color: #a28263;
 }
 
-.FriendsTab {
-  padding: 20px;
+.FriendsModalButton {
+  display: flex;
+  width: calc(100% - 16px * 2);
+  height: 20px;
+  background-color: #b99e7f;
+  margin: 16px;
+  justify-content: center;
+  align-items: center;
 }
