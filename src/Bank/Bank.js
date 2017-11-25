@@ -51,7 +51,7 @@ export default class Bank extends React.Component {
   }
 
   handleBuy = () => {
-    fetch(API_URL + '/buy')
+    fetch('./buy')
   }
 
   renderButton(text, i) {

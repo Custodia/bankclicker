@@ -84,7 +84,7 @@ export default class App extends Component {
   pig;
 
   componentDidMount() {
-    fetch(API_URL).then((response) => {
+    fetch("./api").then((response) => {
       response.json().then((json) => {
         const newEvents = this.state.events.concat([{
           title: "You've earned interest!",
@@ -112,7 +112,7 @@ export default class App extends Component {
 
   saveGame() {
     setTimeout(() => {
-      fetch(API_URL, {
+      fetch("./api", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

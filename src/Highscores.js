@@ -4,7 +4,7 @@ import { API_URL } from './constants';
 
 export default class Highscores extends Component {
   componentDidMount() {
-    fetch(`${API_URL}/highscore`).then(response => {
+    fetch("./highscore").then(response => {
       response.json().then(json => {
         this.setState({ users: json });
       })
