@@ -9,10 +9,10 @@ export default class Router extends React.Component {
   render() {
     return (
       <Switch>
-      <Route exact path='/' component={App}/>
-      <Route path='/verkkopankki' component={Bank}/>
-      <Route path='/highscores' component={Highscores}/>
-    </Switch>
+        <Route exact path='/' component={App}/>
+        <Route path='/verkkopankki' component={Bank}/>
+        <Route path='/highscores' component={Highscores}/>
+      </Switch>
     );
   }
 }

@@ -160,6 +160,7 @@ export default class Bank extends React.Component {
 
   handleBuy = () => {
     fetch('./api/buy')
+    this.handleOpenModal(index);
   }
 
   handleOpenModal = index => this.setState({ modalInvestmentIndex: index });
@@ -240,7 +241,7 @@ export default class Bank extends React.Component {
         </span>
         <span style={{ flex: 1 }}>
           {
-            index > 0 && <div className="BankBuyButton" onClick={() => this.handleOpenModal(index)}>Osta</div>
+            index > 0 && <div className="BankBuyButton" onClick={() => this.handleBuy(index)}>Osta</div>
           }
         </span>
       </ListItem>
@@ -255,9 +256,9 @@ export default class Bank extends React.Component {
     const investment = this.state.investments[this.state.modalInvestmentIndex];
     const { name, value, purchaseValue, count } = investment;
     return (
-      <div>
-        <div className="BankModalTitle">{name}</div>
-        <div className="BankModalBuyButton">Osta</div>
+      <div className="BankModal">
+        <div className="BankModalText">{'Ostotapahtuma onnistui: ' + name}</div>
+        <div onClick={this.handleCloseModal} className="BankModalBuyButton">Sulje</div>
       </div>
     );
   }
