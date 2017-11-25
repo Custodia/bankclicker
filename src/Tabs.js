@@ -36,7 +36,6 @@ const TabButtons = ({ onClick, selected }) => {
       <span className={selected === 'upgrades' ? 'active' : ''} onClick={() => onClick('upgrades')}>Upgrades</span>
       <span className={selected === 'styles' ? 'active' : ''} onClick={() => onClick('styles')}>Styles</span>
       <span className={selected === 'friends' ? 'active' : ''} onClick={() => onClick('friends')}>Friends</span>
-      <span className={selected === 'info' ? 'active' : ''} onClick={() => onClick('info')}>Info</span>
     </div>
   );
 }

@@ -41,6 +41,20 @@ export default class App extends Component {
         level: 1,
         currencyCosts: [1, 2, 5, 10, 20, 50, 100, 1000],
         scoreCosts: [1, 2, 5, 10, 20, 50, 100, 1000]
+      },
+      cigar: {
+        id: 'cigar',
+        name: 'Cigar',
+        level: 1,
+        currencyCosts: [1, 2, 5, 10, 20, 50, 100, 1000],
+        scoreCosts: [1, 2, 5, 10, 20, 50, 100, 1000]
+      },
+      pants: {
+        id: 'pants',
+        name: 'Pants',
+        level: 1,
+        currencyCosts: [1, 2, 5, 10, 20, 50, 100, 1000],
+        scoreCosts: [1, 2, 5, 10, 20, 50, 100, 1000]
       }
     },
     modalEvent: null,
