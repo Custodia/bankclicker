@@ -18,7 +18,7 @@ const initialState = Map({
       styles: {}
     }),
     austin: Map({
-      score: 10
+      score: 10,
       currency: 0,
       increment: 0,
       upgrades: {},
