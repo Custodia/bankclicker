@@ -4,6 +4,7 @@ import BankSection from './BankSection';
 import { API_URL } from '../constants';
 
 import './Bank.css';
+import './BankLoader.css';
 
 const CLIENT_ID = 'e90bd9a2-d6af-4d88-b5e7-adfb0f2a6467';
 const SECRET = 'R3cX0rR4eU3fK8nX0vB0oG6pI7nI6hL7tS5jS8fK5jB8gJ8hA8';
@@ -66,13 +67,30 @@ export default class Bank extends React.Component {
     const { amount, } = payment;
     return (
       <div className="BankPayment">
-        <span className="BankPaymentAmount">{amount + '€'}</span>
+        <span className="BankPaymentAmount">{amount + ' €'}</span>
         <span className="BankPaymentName">{payment.creditor.name}</span>
       </div>
     );
   }
 
+  renderPayments() {
+    if (this.state.loading) {
+      return (
+        <div className="BankLoading">
+          <div className="loader">
+            Loading...
+          </div>
+        </div>
+      );
+    }
+    return this.state.payments.slice(0,10).map(payment => this.renderPayment(payment));
+  }
 
+  renderPaymentCount() {
+    const { length } = this.state.payments;
+    if (length === 0) return null;
+    else return <div className="BankPaymentShowing">{'Showing 10 out of ' + length}</div>
+  }
 
   render() {
     const buttonTexts = ['Verkkopankki', 'Viestit', 'Asetukset'];
@@ -83,8 +101,8 @@ export default class Bank extends React.Component {
         </div>
         <div className="BankContainer">
           <BankSection title="Tilitapahtumat">
-            {this.state.payments.slice(0,10).map(payment => this.renderPayment(payment))}
-
+            {this.renderPayments()}
+            {this.renderPaymentCount()}
           </BankSection>
           <BankSection title="Arvo-osuustili">
             <div onClick={this.handleBuy}>BUY BUY BUY</div>

@@ -38,11 +38,21 @@
   font-family: sans-serif;
 }
 
-.BankPayment {
-  width: 100%;
+.BankPayment, .BankLoading {
+  width: calc(100% - 20px);
+  margin: 0 8px;
   padding: 2px;
   border-bottom: solid 1px #ddd;
   background-color: white;
   display: flex;
   justify-content: space-between;
+}
+
+.BankPaymentShowing {
+  font-size: 12px;
+  text-align: right;
+  width: calc(100% - 8px);
+  margin-top: 4px;
+  color: #444;
+  font-style: italic;
 }

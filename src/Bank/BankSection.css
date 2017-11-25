@@ -2,5 +2,14 @@
   width: 100%;
   max-width: 600px;
   background-color: #ddd;
-  padding: 8px;
+  padding: 8px 0;
+  margin-bottom: 8px;
+}
+
+.BankSectionTitle {
+  width: calc(100% - 8px);
+  display: flex;
+  justify-content: center;
+  padding: 4px;
+  font-size: 18px;
 }
