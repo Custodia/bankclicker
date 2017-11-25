@@ -10,3 +10,17 @@
   left: 50%;
   font-size: 50px;
 }
+
+.Currency {
+  position: absolute;
+  top: 10%;
+  right: 50px;
+  font-size: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.InfoText {
+  margin-bottom: 10px;
+  font-size: 20px;
+}

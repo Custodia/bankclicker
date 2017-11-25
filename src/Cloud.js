@@ -33,8 +33,15 @@ export default class Cloud {
     const context = state.context;
     context.save();
     context.fillStyle = 'rgba(255,255,255, 0.8)';
-    context.fillOpacity = 0.4;
-    context.fillRect(0 + this.xPos, this.yPos, this.width, this.height);
+    /*context.beginPath();
+    context.moveTo(this.xPos, this.yPos);
+    context.arc(
+      this.xPos + 25, this.yPos - 50,
+      this.xPos + 35, this.yPos - 50,
+      Math.PI * 0.75
+    );
+    context.fill();*/
+    context.fillRect(this.xPos, this.yPos, this.width, this.height);
     context.restore();
   }
 }

@@ -16,10 +16,10 @@ export default class Coin {
     // Move
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
-    
+
     const minVelo = 0.1;
     const xTarget = state.screenWidth / 2 + 20;
-    const yTarget = state.screenHeight / 2 + 20;
+    const yTarget = state.screenHeight / 2 - 20;
     const homing = Math.abs(this.velocity.x) < minVelo && Math.abs(this.velocity.y);
     if (homing && !this.startedHoming) {
       if (this.position.x != xTarget) {
@@ -30,12 +30,12 @@ export default class Coin {
       }
       this.startedHoming = true;
     } else if (this.startedHoming) {
-      if (Math.abs(this.position.x - xTarget) > 50) {
+      if (Math.abs(this.position.x - xTarget) > 20) {
         this.velocity.x /= this.inertia;
       } else {
         this.velocity.x = 0;
       }
-      if (Math.abs(this.position.y - yTarget) > 50) {
+      if (Math.abs(this.position.y - yTarget) > 20) {
         this.velocity.y /= this.inertia;
       } else {
         this.velocity.y = 0;
@@ -43,7 +43,7 @@ export default class Coin {
       if (this.velocity.y === 0 && this.velocity.x === 0) {
         this.destroy();
       }
-      
+
     } else if (!this.startedHoming) {
       this.velocity.x *= this.inertia;
       this.velocity.y *= this.inertia;

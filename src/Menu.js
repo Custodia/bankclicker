@@ -7,10 +7,10 @@ import './Menu.css';
 
 export default class Menu extends Component {
   render() {
-    const { score, upgrades } = this.props;
+    const { currency, upgrades } = this.props;
     const { clickPower } = upgrades;
     const clickPowerUpgradeCost = UPGRADE_COSTS.clickPower[clickPower - 1];
-    const clickPowerUpgradeAffordable = score >= clickPowerUpgradeCost;
+    const clickPowerUpgradeAffordable = currency >= clickPowerUpgradeCost;
     return (
       <div className="menu">
         <UpgradeButton

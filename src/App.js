@@ -11,6 +11,7 @@ import './App.css';
 export default class App extends Component {
   state = {
     score: 0,
+    currency: 0,
     screenWidth: window.innerWidth,
     screenHeight: window.innerHeight,
     screenRatio: window.devicePixelRatio || 1,
@@ -27,7 +28,7 @@ export default class App extends Component {
   pig;
 
   componentDidMount() {
-    window.addEventListener('resize', this.handleResize.bind(this, false));
+    window.addEventListener('resize', this.handleResize);
     const context = this.canvas.getContext('2d');
     this.setState({ context: context });
     this.background = new Background(this.state)
@@ -45,19 +46,19 @@ export default class App extends Component {
   };
 
   handleUpgradeClickPower = cost => {
-    const { score, upgrades } = this.state;
+    const { currency, upgrades } = this.state;
     const { clickPower } = upgrades;
     this.setState({
       upgrades: {
         ...upgrades,
         clickPower: clickPower + 1
       },
-      score: score - cost
+      currency: currency - cost
     });
   };
 
   handleUpgradeWorker = (type, name, cost) => {
-    const { score, upgrades } = this.state;
+    const { currency, upgrades } = this.state;
     this.setState({
       upgrades: {
         ...upgrades,
@@ -66,7 +67,7 @@ export default class App extends Component {
           [type]: this.state[name][type] + 1
         }
       },
-      score: score - cost
+      currency: currency - cost
     });
   };
 
@@ -74,7 +75,7 @@ export default class App extends Component {
     this.updateScoreBy(this.state.upgrades.clickPower);
     this.coins.push(new Coin({
       lifeSpan: randomNumBetween(60, 100),
-        size: 8,
+        size: 5 + this.state.upgrades.clickPower,
         position: {
           x: event.nativeEvent.clientX,
           y: event.nativeEvent.clientY
@@ -86,6 +87,8 @@ export default class App extends Component {
         }
     }))
   };
+
+  handleCurrencyClick = event => this.setState({ currency: this.state.currency + 1 });
 
   updateScoreBy = amount => {
     this.setState({ score: this.state.score + amount });
@@ -111,7 +114,11 @@ export default class App extends Component {
     return (
       <div className="App">
         <div className="Score">
-          {this.state.score}
+          <span>{this.state.score}</span>
+        </div>
+        <div className="Currency" onClick={this.handleCurrencyClick}>
+          <span className="InfoText">Currency: </span>
+          <span>{this.state.currency}</span>
         </div>
         <canvas
           ref={ref => this.canvas = ref}
@@ -123,7 +130,7 @@ export default class App extends Component {
           onUpgradeClickPower={this.handleUpgradeClickPower}
           onUpgradeWorker={this.handleUpgradeWorker}
           upgrades={this.state.upgrades}
-          score={this.state.score}
+          currency={this.state.currency}
         />
       </div>
     );
