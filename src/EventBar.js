@@ -8,21 +8,21 @@ export default class EventBar extends Component {
     displayedEvent: ({
       title: 'Made investment',
       description: 'lorem ipsum...',
-      coinValue: randomNumBetween(5, 15),
-      currencyValue: randomNumBetween(0, 5)
+      coinValue: Math.floor(randomNumBetween(5, 15)),
+      currencyValue: Math.floor(randomNumBetween(0, 5))
     }),
     events: [
       {
         title: 'Got interest',
         description: 'lorem ipsum...',
-        coinValue: randomNumBetween(5, 15),
-        currencyValue: randomNumBetween(0, 5)
+        coinValue: Math.floor(randomNumBetween(5, 15)),
+        currencyValue: Math.floor(randomNumBetween(0, 5))
       },
       {
         title: 'Friend level upped',
         description: 'lorem ipsum...',
-        coinValue: randomNumBetween(5, 15),
-        currencyValue: randomNumBetween(0, 5)
+        coinValue: Math.floor(randomNumBetween(5, 15)),
+        currencyValue: Math.floor(randomNumBetween(0, 5))
       }
     ]
   }
