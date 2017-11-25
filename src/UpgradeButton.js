@@ -17,7 +17,7 @@ export default class UpgradeButton extends Component {
       <div
         className="upgrade-button"
         style={style}
-        onClick={!disabled && this.props.onClick}
+        onClick={!disabled ? this.props.onClick : undefined}
       >
         {text}
       </div>
