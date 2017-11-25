@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import UpgradeButton from './UpgradeButton';
 import EventBar from './EventBar';
-import { UPGRADE_COSTS } from './UpgradeCosts';
 
 import './Menu.css';
 
