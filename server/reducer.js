@@ -5,8 +5,10 @@ const initialState = Map({
 })
 
 initialUserData = Map({
+  score: 0,
   currency: 0,
-  increment: 0
+  increment: 0,
+  upgrades: {}
 })
 
 var reducer = function(state, action) {
@@ -22,6 +24,14 @@ var reducer = function(state, action) {
 
     case 'BUY': {
       return state.setIn(['users', action.user, 'increment'], state.getIn(['users', action.user, 'increment']) + action.increment);
+    }
+
+    case 'SAVE': {
+      return state.setIn(['users', action.user], Map({
+        score: action.score,
+        currency: action.currency,
+        upgrades: action.upgrades
+      }))
     }
 
     default:

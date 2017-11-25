@@ -4,6 +4,7 @@ const { createStore } =  require('redux');
 const { Map } = require('immutable');
 
 const express = require('express');
+const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const path = require('path');
 
@@ -29,6 +30,8 @@ function randNumber(min, max) {
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
+app.use(bodyParser.json());
+
 app.get('/api/buy', (req, res) => {
   const increment = 1
   const user = req.query.user || 'john';
@@ -45,6 +48,18 @@ app.get('/api/buy', (req, res) => {
     increment
   });
 	res.send()
+});
+
+app.post('/api', (req, res) => {
+  const user = req.body.user || 'john';
+  res.dispatch({
+    type: "SAVE",
+    user,
+    score: req.body.score,
+    currency: req.body.currency,
+    upgrades: req.body.upgrades
+  });
+  res.end("yes");
 });
 
 app.get('/api', (req, res) => {

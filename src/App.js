@@ -80,6 +80,21 @@ export default class App extends Component {
     requestAnimationFrame(() => this.update());
   }
 
+  saveGame() {
+    fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user: 'john',
+        score: this.state.score,
+        currency: this.state.currency,
+        upgrades: this.state.upgrades
+      })
+    })
+  }
+
   handleResize = () => {
     this.setState({
       screenWidth: window.innerWidth,
@@ -96,6 +111,7 @@ export default class App extends Component {
       currency: currency - currencyCost,
       score: score - scoreCost
     });
+    this.saveGame();
   }
 
   handleClick = (event) => {
@@ -136,6 +152,7 @@ export default class App extends Component {
         }
       }));
     }
+    this.saveGame();
   }
 
   handleEventButtonClick = () => {
