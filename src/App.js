@@ -19,6 +19,7 @@ export default class App extends Component {
     context: null,
     upgrades: {
       clickPower: 1,
+      clickCoins: 1,
       investor: {
         level: 1,
         count: 0
@@ -58,41 +59,39 @@ export default class App extends Component {
       currency: currency - cost
     });
   };
-
-  handleUpgradeWorker = (type, name, cost) => {
-    const { currency, upgrades } = this.state;
+  
+  handleUpgrade = (currencyCost, scoreCost, targetUpgrade) => {
+    const { currency, upgrades, score } = this.state;
+    const targetUpgradeLevel = upgrades[targetUpgrade];
+    upgrades[targetUpgrade] += 1;
     this.setState({
-      upgrades: {
-        ...upgrades,
-        [name]: {
-          ...this.state[name],
-          [type]: this.state[name][type] + 1
-        }
-      },
-      currency: currency - cost
+      upgrades,
+      currency: currency - currencyCost,
+      score: score - scoreCost
     });
-  };
+  }
 
   handleClick = (event) => {
-    this.coins.push(new Coin({
-      lifeSpan: randomNumBetween(60, 100),
-        size: 5 + this.state.upgrades.clickPower,
-        position: {
-          x: event.nativeEvent.clientX,
-          y: event.nativeEvent.clientY
-        },
-        velocity: {
-          x: event.nativeEvent.clientX <= this.state.screenWidth / 2 ?
-            randomNumBetween(0, 5) : randomNumBetween(-5, 0),
-          y: randomNumBetween(-10, -5)
-        }
-    }))
+    for(var i = 0; i < this.state.upgrades.clickCoins; i++) {
+      this.coins.push(new Coin({
+        lifeSpan: randomNumBetween(60, 100),
+          size: 5 + this.state.upgrades.clickPower,
+          position: {
+            x: event.nativeEvent.clientX,
+            y: event.nativeEvent.clientY
+          },
+          velocity: {
+            x: event.nativeEvent.clientX <= this.state.screenWidth / 2 ?
+              randomNumBetween(0, 5) : randomNumBetween(-5, 0),
+            y: randomNumBetween(-10, -5)
+          }
+      }))
+    }
   };
 
   handleEventModalClick = () => {
     const event = this.state.activateModalEvent;
     if (!event) return;
-    console.log(event)
     this.setState({ activateModalEvent: null, currency: this.state.currency + Math.floor(event.currencyValue) });
     const xTarget = this.state.screenWidth / 2 + 20;
     const yTarget = this.state.screenHeight / 4;
@@ -158,10 +157,10 @@ export default class App extends Component {
           height={this.state.screenHeight}
         />
         <Menu
-          onUpgradeClickPower={this.handleUpgradeClickPower}
-          onUpgradeWorker={this.handleUpgradeWorker}
+          onUpgrade={this.handleUpgrade}
           upgrades={this.state.upgrades}
           currency={this.state.currency}
+          score={this.state.score}
           activateModalEvent={e => this.setState({ activateModalEvent: e })}
         />
       </div>

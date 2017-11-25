@@ -6,19 +6,35 @@ import { UPGRADE_COSTS } from './UpgradeCosts';
 
 import './Menu.css';
 
+const upgrades = [
+  {
+    id: 'clickPower',
+    name: 'Click Power',
+    currencyCosts: [1, 2, 5, 10, 20, 50, 100, 1000],
+    scoreCosts: [1, 2, 5, 10, 20, 50, 100, 1000]
+  },
+  {
+    id: 'clickCoins',
+    name: 'Click Coins',
+    currencyCosts: [1, 2, 5, 10, 20, 50, 100, 1000],
+    scoreCosts: [1, 2, 5, 10, 20, 50, 100, 1000]
+  }
+]
+
 export default class Menu extends Component {
   render() {
-    const { currency, upgrades } = this.props;
-    const { clickPower } = upgrades;
-    const clickPowerUpgradeCost = UPGRADE_COSTS.clickPower[clickPower - 1];
-    const clickPowerUpgradeAffordable = currency >= clickPowerUpgradeCost;
     return (
       <div className="menu">
-        <UpgradeButton
-          text={`Upgrade Click Power (Cost: ${clickPowerUpgradeCost})`}
-          disabled={!clickPowerUpgradeAffordable}
-          onClick={() => this.props.onUpgradeClickPower(clickPowerUpgradeCost)}
-        />
+        <span className="UpgradeTitle">Upgrades</span>
+        {upgrades.map(upgrade => (
+          <UpgradeButton
+            upgrade={upgrade}
+            power={this.props.upgrades[upgrade.id]}
+            currency={this.props.currency}
+            score={this.props.score}
+            onUpgrade={this.props.onUpgrade}
+          />
+        ))}
         <EventBar activateEvent={this.props.activateModalEvent}/>
       </div>
     );
