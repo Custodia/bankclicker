@@ -22,10 +22,10 @@ export default class Coin {
     const yTarget = state.screenHeight / 2 - 20;
     const homing = Math.abs(this.velocity.x) < minVelo && Math.abs(this.velocity.y);
     if (homing && !this.startedHoming) {
-      if (this.position.x != xTarget) {
+      if (this.position.x !== xTarget) {
         this.velocity.x = this.position.x < xTarget ? 1 : -1
       }
-      if (this.position.y != yTarget) {
+      if (this.position.y !== yTarget) {
         this.velocity.y = this.position.y < yTarget ? 1 : -1
       }
       this.startedHoming = true;

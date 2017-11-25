@@ -2,7 +2,6 @@ import Cloud from './Cloud';
 
 class Background {
   constructor(state) {
-    const context = state.context;
     this.height = 0;
     this.clouds = []
     for(var i = 0; i < 5; i++) {

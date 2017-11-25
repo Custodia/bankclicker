@@ -4,7 +4,7 @@ import Pig from './Pig';
 import Menu from './Menu';
 import Background from './Background';
 import Coin from './Coin';
-import { randomNumBetweenExcluding, randomNumBetween } from './helpers'
+import { randomNumBetween } from './helpers'
 
 import './App.css';
 

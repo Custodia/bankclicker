@@ -2,7 +2,6 @@ const JUMP_VELOCITY = 4;
 
 export default class Pig {
   constructor(state) {
-    const context = state.context;
     this.height = 0;
     this.velocity = JUMP_VELOCITY;
   }
