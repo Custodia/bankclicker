@@ -72,7 +72,6 @@ export default class App extends Component {
   };
 
   handleClick = (event) => {
-    this.updateScoreBy(this.state.upgrades.clickPower);
     this.coins.push(new Coin({
       lifeSpan: randomNumBetween(60, 100),
         size: 5 + this.state.upgrades.clickPower,
@@ -104,7 +103,12 @@ export default class App extends Component {
     // Render
     this.background.render(this.state)
     this.pig.render(this.state);
-    this.coins.forEach(coin => { if (coin.delete) this.coins = this.coins.filter(c => c !== coin); });
+    this.coins.forEach(coin => {
+      if (coin.delete) {
+        this.updateScoreBy(this.state.upgrades.clickPower);
+        this.coins = this.coins.filter(c => c !== coin);
+      }
+    });
     this.coins.forEach(c => c.render(this.state))
     context.restore();
     requestAnimationFrame(() => this.update());
