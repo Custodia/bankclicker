@@ -55,8 +55,13 @@ export default class App extends Component {
   componentDidMount() {
     fetch(API_URL).then((response) => {
       response.json().then((json) => {
-        this.setState({ currency: json.currency });
-        //this.setState({ events: this.events.push(asdfasdf) });
+        const newEvents = this.state.events.concat([{
+          title: "You've earned interest!",
+          description: "You're investments have earned interest, here's your daily bonus!",
+          coinValue: 100,
+          currencyValue: json.increment
+        }]);
+        this.setState({ currency: json.currency, events: newEvents });
       });
     });
     window.addEventListener('resize', this.handleResize);
