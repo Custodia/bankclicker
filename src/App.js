@@ -68,7 +68,12 @@ export default class App extends Component {
           coinValue: 100,
           currencyValue: json.increment
         }]);
-        this.setState({ currency: json.currency, events: newEvents });
+        this.setState({
+          score: json.score,
+          currency: json.currency,
+          upgrades: { ...this.state.upgrades, ...json.upgrades },
+          events: newEvents
+        });
       });
     });
     window.addEventListener('resize', this.handleResize);
@@ -81,18 +86,20 @@ export default class App extends Component {
   }
 
   saveGame() {
-    fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        user: 'john',
-        score: this.state.score,
-        currency: this.state.currency,
-        upgrades: this.state.upgrades
+    setTimeout(() => {
+      fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user: 'john',
+          score: this.state.score,
+          currency: this.state.currency,
+          upgrades: this.state.upgrades
+        })
       })
-    })
+    }, 0);
   }
 
   handleResize = () => {

@@ -65,19 +65,24 @@ app.post('/api', (req, res) => {
 app.get('/api', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   const user = req.query.user || 'john';
-  let userData = res.getStore().getState().getIn(['users', user])
+  let userData = res.getStore().getState().getIn(['users', user]);
   if (!userData) {
-    userData = Map({ currency: 0, increment: 0 })
     res.dispatch({
       type: 'CREATE USER',
       user
-    })
+    });
+    userData = res.getStore().getState().getIn(['users', user]);
   }
   res.dispatch({
     type: 'REFRESH',
     user
   });
-  res.send(JSON.stringify({currency: userData.get('currency'), increment: userData.get('increment')}));
+  res.send(JSON.stringify({
+    score: userData.get('score'),
+    currency: userData.get('currency'),
+    increment: userData.get('increment'),
+    upgrades: userData.get('upgrades')
+  }));
 });
 
 // Always return the main index.html, so react-router render the route in the client
