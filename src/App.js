@@ -90,7 +90,7 @@ export default class App extends Component {
 
   handleUpgrade = (currencyCost, scoreCost, targetUpgrade) => {
     const { currency, upgrades, score } = this.state;
-    upgrades[targetUpgrade] += 1;
+    upgrades[targetUpgrade].level += 1;
     this.setState({
       upgrades,
       currency: currency - currencyCost,
