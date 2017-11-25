@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 
+import { randomNumBetween } from './helpers'
 import './EventBar.css';
 
 export default class EventBar extends Component {
@@ -7,18 +8,21 @@ export default class EventBar extends Component {
     displayedEvent: ({
       title: 'Made investment',
       description: 'lorem ipsum...',
-      value: 10
+      coinValue: randomNumBetween(5, 15),
+      currencyValue: randomNumBetween(0, 5)
     }),
     events: [
       {
         title: 'Got interest',
         description: 'lorem ipsum...',
-        value: 10
+        coinValue: randomNumBetween(5, 15),
+        currencyValue: randomNumBetween(0, 5)
       },
       {
         title: 'Friend level upped',
         description: 'lorem ipsum...',
-        value: 10
+        coinValue: randomNumBetween(5, 15),
+        currencyValue: randomNumBetween(0, 5)
       }
     ]
   }
