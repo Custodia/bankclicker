@@ -89,8 +89,6 @@ export default class App extends Component {
     }))
   };
 
-  handleCurrencyClick = event => this.setState({ currency: this.state.currency + 1 });
-
   handleEventModalClick = () => {
     const event = this.state.activateModalEvent;
     if (!event) return;
@@ -146,7 +144,7 @@ export default class App extends Component {
         <div className="Score">
           <span>{this.state.score}</span>
         </div>
-        <div className="Currency" onClick={this.handleCurrencyClick}>
+        <div className="Currency" >
           <span className="CurrencyText">currency</span>
           <span className="CurrencyValue">{this.state.currency}</span>
         </div>
