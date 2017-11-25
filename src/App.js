@@ -96,6 +96,7 @@ export default class App extends Component {
           score: json.score,
           currency: json.currency,
           upgrades: { ...this.state.upgrades, ...json.upgrades },
+          styles: { ...this.state.styles, ...json.styles },
           events: newEvents
         });
       });
@@ -120,7 +121,8 @@ export default class App extends Component {
           user: 'john',
           score: this.state.score,
           currency: this.state.currency,
-          upgrades: this.state.upgrades
+          upgrades: this.state.upgrades,
+          styles: this.state.styles
         })
       })
     }, 0);
@@ -144,7 +146,7 @@ export default class App extends Component {
     });
     this.saveGame();
   }
-  
+
   handleStyling = (currencyCost, scoreCost, targetUpgrade) => {
     const { currency, styles, score } = this.state;
     styles[targetUpgrade].level += 1;

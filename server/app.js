@@ -41,7 +41,8 @@ app.get('/api/highscore', (req, res) => {
         score: e.get('score'),
         currency: e.get('currency'),
         increment: e.get('increment'),
-        upgrades: e.get('upgrades')
+        upgrades: e.get('upgrades'),
+        styles: e.get('styles')
       }), []);
   res.send(JSON.stringify(result));
 });
@@ -71,7 +72,8 @@ app.post('/api', (req, res) => {
     user,
     score: req.body.score,
     currency: req.body.currency,
-    upgrades: req.body.upgrades
+    upgrades: req.body.upgrades,
+    styles: req.body.styles
   });
   res.end("yes");
 });
@@ -95,7 +97,8 @@ app.get('/api', (req, res) => {
     score: userData.get('score'),
     currency: userData.get('currency'),
     increment: userData.get('increment'),
-    upgrades: userData.get('upgrades')
+    upgrades: userData.get('upgrades'),
+    styles: userData.get('styles')
   }));
 });
 

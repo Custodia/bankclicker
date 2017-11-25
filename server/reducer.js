@@ -1,34 +1,30 @@
 const { Map } = require('immutable');
 
-const initialState = Map({
-  users: Map({
-    kate: Map({
-      score: 0,
-      currency: 0,
-      increment: 0,
-      upgrades: {}
-    }),
-    austin: Map({
-      score: 10,
-      currency: 0,
-      increment: 0,
-      upgrades: {}
-    })
-  })
-})
-
-initialUserData = Map({
+const initialUserData = {
   score: 0,
   currency: 0,
   increment: 0,
-  upgrades: {}
+  upgrades: {},
+  styles: {}
+}
+
+const initialState = Map({
+  users: Map({
+    kate: Map({
+      ...initialUserData
+    }),
+    austin: Map({
+      ...initialUserData,
+      score: 10
+    })
+  })
 })
 
 var reducer = function(state, action) {
   if (state === undefined) { return reducer(initialState, action) };
   switch (action.type) {
     case 'CREATE USER': {
-      return state.setIn(['users', action.user], initialUserData)
+      return state.setIn(['users', action.user], Map(initialUserData))
     }
 
     case 'REFRESH': {
@@ -43,7 +39,8 @@ var reducer = function(state, action) {
       return state.setIn(['users', action.user], Map({
         score: action.score,
         currency: action.currency,
-        upgrades: action.upgrades
+        upgrades: action.upgrades,
+        styles: action.styles
       }))
     }
 
