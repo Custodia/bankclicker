@@ -5,7 +5,8 @@ const initialState = Map({
 })
 
 initialUserData = Map({
-  currency: 0
+  currency: 0,
+  increment: 0
 })
 
 var reducer = function(state, action) {
@@ -16,7 +17,11 @@ var reducer = function(state, action) {
     }
 
     case 'REFRESH': {
-      return state.setIn(['users', action.user, 'currency'], state.getIn(['users', action.user, 'currency']) + action.increment);
+      return state.setIn(['users', action.user, 'increment'], 0);
+    }
+
+    case 'BUY': {
+      return state.setIn(['users', action.user, 'increment'], state.getIn(['users', action.user, 'increment']) + action.increment);
     }
 
     default:

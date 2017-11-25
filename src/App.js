@@ -6,10 +6,9 @@ import Background from './Background';
 import Coin from './Coin';
 import EventModal from './EventModal';
 import { randomNumBetween } from './helpers'
+import { API_URL } from './constants';
 
 import './App.css';
-
-const API_URL = 'http://localhost:4000/api';
 
 export default class App extends Component {
   state = {
@@ -88,7 +87,7 @@ export default class App extends Component {
       screenRatio: window.devicePixelRatio || 1
     });
   };
-  
+
   handleUpgrade = (currencyCost, scoreCost, targetUpgrade) => {
     const { currency, upgrades, score } = this.state;
     upgrades[targetUpgrade] += 1;
@@ -138,7 +137,7 @@ export default class App extends Component {
       }));
     }
   }
-  
+
   handleEventButtonClick = () => {
     const events = this.state.events;
     const displayedEvent = events.pop();

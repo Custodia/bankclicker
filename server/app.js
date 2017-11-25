@@ -29,13 +29,30 @@ function randNumber(min, max) {
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
-app.get('/api', (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  const increment = Math.floor(randNumber(5, 10));
+app.get('/api/buy', (req, res) => {
+  const increment = 1
   const user = req.query.user || 'john';
   let userData = res.getStore().getState().getIn(['users', user])
   if (!userData) {
-    userData = Map({ currency: 0 })
+    res.dispatch({
+      type: 'CREATE USER',
+      user
+    })
+  }
+  res.dispatch({
+    type: 'BUY',
+    user,
+    increment
+  });
+	res.send()
+});
+
+app.get('/api', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  const user = req.query.user || 'john';
+  let userData = res.getStore().getState().getIn(['users', user])
+  if (!userData) {
+    userData = Map({ currency: 0, increment: 0 })
     res.dispatch({
       type: 'CREATE USER',
       user
@@ -43,10 +60,9 @@ app.get('/api', (req, res) => {
   }
   res.dispatch({
     type: 'REFRESH',
-    user,
-    increment
+    user
   });
-  res.send(JSON.stringify({currency: userData.get('currency'), increment}));
+  res.send(JSON.stringify({currency: userData.get('currency'), increment: userData.get('increment')}));
 });
 
 // Always return the main index.html, so react-router render the route in the client

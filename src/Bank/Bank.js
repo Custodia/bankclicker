@@ -1,6 +1,7 @@
 import React from 'react';
 
 import BankSection from './BankSection';
+import { API_URL } from '../constants';
 
 import './Bank.css';
 
@@ -9,7 +10,8 @@ const SECRET = 'R3cX0rR4eU3fK8nX0vB0oG6pI7nI6hL7tS5jS8fK5jB8gJ8hA8';
 
 export default class Bank extends React.Component {
   state = {
-    payments: []
+    payments: [],
+    loading: true
   };
 
   componentDidMount() {
@@ -42,12 +44,14 @@ export default class Bank extends React.Component {
             }
           })
           .then(response => response.json())
-          .then(data => this.setState({ payments: data.response.payments }))
+          .then(data => this.setState({ payments: data.response.payments, loading: false }))
         });
       })
   }
 
-  handleBuy = () => { console.log('bought') }
+  handleBuy = () => {
+    fetch(API_URL + '/buy')
+  }
 
   renderButton(text, i) {
     const selected = text === 'Verkkopankki';
@@ -67,6 +71,8 @@ export default class Bank extends React.Component {
       </div>
     );
   }
+
+
 
   render() {
     const buttonTexts = ['Verkkopankki', 'Viestit', 'Asetukset'];
