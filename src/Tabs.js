@@ -23,17 +23,7 @@ export default class Tabs extends Component {
     return (
       <div className="TabsBar">
         <span className="UpgradeTitle">Upgrades</span>
-        {Object.keys(this.props.upgrades).map(key => {
-          const upgrade = this.props.upgrades[key];
-          return (
-            <UpgradeButton
-            upgrade={upgrade}
-            currency={this.props.currency}
-            score={this.props.score}
-            onUpgrade={this.props.onUpgrade}
-            />
-          );
-        })}
+        <UpgradesTab {...this.props} />
       </div>
     )
   }
@@ -47,18 +37,20 @@ const TabButtons = ({ activateTab, selectedTab }) => {
   );
 }
 
-const UpgradeTab = ({ upgrades, currency, score, onUpgrade }) => {
+const UpgradesTab = ({ upgrades, currency, score, onUpgrade }) => {
   return (
     <div className="UpgradeTab">
-      {upgrades.map(upgrade => (
-        <UpgradeButton
+      {Object.keys(upgrades).map(key => {
+        const upgrade = upgrades[key];
+        return (
+          <UpgradeButton
           upgrade={upgrade}
-          power={upgrade.level}
-          currency={this.props.currency}
-          score={this.props.score}
-          onUpgrade={this.props.onUpgrade}
-        />
-      ))}
+          currency={currency}
+          score={score}
+          onUpgrade={onUpgrade}
+          />
+        );
+      })}
     </div>
   )
 }
