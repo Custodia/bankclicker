@@ -1,39 +1,44 @@
 import { randomNumBetweenExcluding, randomNumBetween } from './helpers'
 
+const MAX_CLOUD_WIDTH = 200;
+
 export default class Cloud {
   constructor(args, state) {
-    this.height = randomNumBetween(10, 50);
-    this.width = randomNumBetween(10, 50) * randomNumBetween(1, 5);;
-    this.velocity = randomNumBetweenExcluding(-0.75, 0.75, -0.1, 0.1);
+    this.generateCloud();
     this.xPos = randomNumBetween(0, state.screenWidth);
     this.yPos = randomNumBetween(0, state.screenHeight / 2);
   }
 
-  componentDidMount() {
-    requestAnimationFrame(() => this.update());
+  generateCloud() {
+    this.height = randomNumBetween(20, 50);
+    this.width = randomNumBetween(60, MAX_CLOUD_WIDTH);
+    this.velocity = randomNumBetweenExcluding(-0.6, 0.6, -0.35, 0.35);
   }
 
   update(state) {
     this.xPos += this.velocity
     if(this.xPos > state.screenWidth){
-        this.xPos -= state.screenWidth + this.width;
-        this.yPos = randomNumBetween(0, state.screenHeight / 2);
+      this.generateCloud();
+      this.xPos = -MAX_CLOUD_WIDTH;
+      this.yPos = randomNumBetween(0, state.screenHeight / 2);
     }
-    if(this.xPos < -this.width){
-        this.xPos += state.screenWidth;
-        this.yPos = randomNumBetween(0, state.screenHeight / 2);
+    if(this.xPos < -MAX_CLOUD_WIDTH){
+      this.generateCloud();
+      this.xPos += state.screenWidth + MAX_CLOUD_WIDTH;
+      this.yPos = randomNumBetween(0, state.screenHeight / 2);
     }
   }
 
   render(state) {
     const context = state.context;
     context.save();
-    context.fillStyle = '#fff';
+    context.fillStyle = 'rgba(255,255,255, 0.8)';
+    context.fillOpacity = 0.4;
     context.fillRect(0 + this.xPos, this.yPos, this.width, this.height);
     context.restore();
   }
 }
-// 
+//
 // var sky = document.getElementsByClassName('back')[0];
 //     screenWidth = window.screen.width,
 //     boxHeight = 300,
@@ -47,41 +52,41 @@ export default class Cloud {
 //         scale = speed,
 //         scaleString = 'scale(' + scale + ' ' + scale + ')',
 //         opacity = scale;
-// 
-// 
-// 
+//
+//
+//
 //     var cloud = document.createElementNS("http://www.w3.org/2000/svg", 'path');//create SVG
-// 
+//
 //     cloud.setAttribute('d', path);//set path
 //     cloud.setAttribute('fill', "white");//color
 //     cloud.setAttribute('fill-opacity', opacity);
-// 
+//
 //     if(direction > 0.5){//set random direction
 //         speed = -speed;
 //     }
-// 
+//
 //     sky.appendChild(cloud);//put clouds in the sky
-// 
+//
 //     this.animate = function(){//animation method
-// 
+//
 //     };
 // };
-// 
+//
 // var createClouds = function(quantity){
 //     for (var i = 0; i < quantity; i++) {//create clouds and put them inside array
 //         clouds.push(new cloud(screenWidth, boxHeight));
 //     }
 // };
-// 
-// 
-// 
+//
+//
+//
 // var render = function(){//call the animate method from each cloud and control flow with requestAnimationFrame
 //     for (var i = 0; i < clouds.length; i++) {
 //         clouds[i].animate();
-// 
+//
 //     }
 //     requestAnimationFrame(render);
 // };
-// 
+//
 // createClouds(10);
 // render();
