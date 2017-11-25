@@ -9,6 +9,8 @@ import { randomNumBetween } from './helpers'
 
 import './App.css';
 
+const API_URL = 'http://localhost:4000/api';
+
 export default class App extends Component {
   state = {
     score: 0,
@@ -31,6 +33,12 @@ export default class App extends Component {
   pig;
 
   componentDidMount() {
+    fetch(API_URL).then((response) => {
+      response.json().then((json) => {
+        this.setState({ currency: json.currency });
+        //this.setState({ events: this.events.push(asdfasdf) });
+      });
+    });
     window.addEventListener('resize', this.handleResize);
     const context = this.canvas.getContext('2d');
     this.setState({ context: context });
