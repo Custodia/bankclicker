@@ -1,7 +1,20 @@
 const { Map } = require('immutable');
 
 const initialState = Map({
-  users: Map({})
+  users: Map({
+    kate: Map({
+      score: 0,
+      currency: 0,
+      increment: 0,
+      upgrades: {}
+    }),
+    austin: Map({
+      score: 10,
+      currency: 0,
+      increment: 0,
+      upgrades: {}
+    })
+  })
 })
 
 initialUserData = Map({
