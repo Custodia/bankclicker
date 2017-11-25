@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import UpgradeButton from './UpgradeButton';
+import EventBar from './EventBar';
 import { UPGRADE_COSTS } from './UpgradeCosts';
 
 import './Menu.css';
@@ -18,6 +19,7 @@ export default class Menu extends Component {
           disabled={!clickPowerUpgradeAffordable}
           onClick={() => this.props.onUpgradeClickPower(clickPowerUpgradeCost)}
         />
+        <EventBar activateEvent={this.props.activateModalEvent}/>
       </div>
     );
   }

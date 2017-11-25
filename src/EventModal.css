@@ -1,0 +1,11 @@
+.eventModal {
+  color: white;
+  position: fixed;
+  top: 10%;
+  left: 20%;
+  width: 50%;
+  height: 25%;
+  z-index: 10000;
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.55);
+}

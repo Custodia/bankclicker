@@ -4,6 +4,7 @@ import Pig from './Pig';
 import Menu from './Menu';
 import Background from './Background';
 import Coin from './Coin';
+import EventModal from './EventModal';
 import { randomNumBetween } from './helpers'
 
 import './App.css';
@@ -22,7 +23,8 @@ export default class App extends Component {
         level: 1,
         count: 0
       }
-    }
+    },
+    modalEvent: null
   }
 
   pig;
@@ -117,6 +119,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
+        {this.state.activateModalEvent ? <EventModal /> : null}
         <div className="Score">
           <span>{this.state.score}</span>
         </div>
@@ -135,6 +138,7 @@ export default class App extends Component {
           onUpgradeWorker={this.handleUpgradeWorker}
           upgrades={this.state.upgrades}
           currency={this.state.currency}
+          activateModalEvent={e => this.setState({ activateModalEvent: e })}
         />
       </div>
     );
