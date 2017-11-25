@@ -6,16 +6,19 @@ export default class EventBar extends Component {
   state = {
     displayedEvent: ({
       title: 'Made investment',
-      description: 'lorem ipsum...'
+      description: 'lorem ipsum...',
+      value: 10
     }),
     events: [
       {
         title: 'Got interest',
-        description: 'lorem ipsum...'
+        description: 'lorem ipsum...',
+        value: 10
       },
       {
         title: 'Friend level upped',
-        description: 'lorem ipsum...'
+        description: 'lorem ipsum...',
+        value: 10
       }
     ]
   }

@@ -92,7 +92,25 @@ export default class App extends Component {
   handleCurrencyClick = event => this.setState({ currency: this.state.currency + 1 });
   
   handleEventModalClick = () => {
-    this.setState({ activateModalEvent: null })
+    const event = this.state.activateModalEvent;
+    if (!event) return;
+    this.setState({ activateModalEvent: null });
+    const xTarget = this.state.screenWidth / 2 + 20;
+    const yTarget = this.state.screenHeight / 4;
+    for(var i = 0; i < event.value; i++) {
+      this.coins.push(new Coin({
+        lifeSpan: randomNumBetween(60, 100),
+          size: 5 + this.state.upgrades.clickPower,
+          position: {
+            x: xTarget,
+            y: yTarget
+          },
+          velocity: {
+            x: randomNumBetween(-10, 10),
+            y: randomNumBetween(-20, 0)
+          }
+      }));
+    }
   }
 
   updateScoreBy = amount => {
