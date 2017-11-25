@@ -1,6 +1,6 @@
 .BankSectionContainer {
   width: 100%;
   max-width: 600px;
-  background-color: grey;
+  background-color: #ddd;
   padding: 8px;
 }
