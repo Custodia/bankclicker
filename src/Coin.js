@@ -30,12 +30,12 @@ export default class Coin {
       }
       this.startedHoming = true;
     } else if (this.startedHoming) {
-      if (Math.abs(this.position.x - xTarget) > 20) {
+      if (Math.abs(this.position.x - xTarget) > 30) {
         this.velocity.x /= this.inertia;
       } else {
         this.velocity.x = 0;
       }
-      if (Math.abs(this.position.y - yTarget) > 20) {
+      if (Math.abs(this.position.y - yTarget) > 30) {
         this.velocity.y /= this.inertia;
       } else {
         this.velocity.y = 0;
