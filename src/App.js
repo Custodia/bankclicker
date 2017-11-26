@@ -9,10 +9,41 @@ import { randomNumBetween } from './helpers'
 
 import './App.css';
 
+const DEFAULT_COST = [1, 2, 5, 10, 20, 50, 100, 1000, 2000, 5000, 10000, 50000, 100000, 200000];
+
+class UserSelectModal extends Component {
+  state = {
+    text: ''
+  }
+
+  handleChange = event => this.setState({ text: event.target.value });
+
+  handleKeyDown = e => e.keyCode === 13 ? this.props.onSubmit(this.state.text) : null;
+
+  render() {
+    return (
+      <div>
+        <div className="UserSelectModalBackground" />
+        <div className="UserSelectModalContainer">
+          <span>User:</span>
+          <input
+            type="text"
+            value={this.state.text}
+            onChange={this.handleChange}
+            onKeyDown={this.handleKeyDown}
+          />
+          <button onClick={() => this.props.onSubmit(this.state.text)}>Ok</button>
+        </div>
+      </div>
+    );
+  }
+}
+
 export default class App extends Component {
   state = {
-    score: 100,
-    currency: 100000,
+    user: null,
+    score: 0,
+    currency: 0,
     screenWidth: window.innerWidth,
     screenHeight: window.innerHeight,
     screenRatio: window.devicePixelRatio || 1,
@@ -22,15 +53,15 @@ export default class App extends Component {
         id: 'clickPower',
         name: 'Power',
         level: 1,
-        currencyCosts: [1, 2, 5, 10, 20, 50, 100, 1000],
-        scoreCosts: [1, 2, 5, 10, 20, 50, 100, 1000]
+        currencyCosts: DEFAULT_COST,
+        scoreCosts: DEFAULT_COST
       },
       clickCoins: {
         id: 'clickCoins',
         name: 'Coins',
         level: 1,
-        currencyCosts: [1, 2, 5, 10, 20, 50, 100, 1000],
-        scoreCosts: [1, 2, 5, 10, 20, 50, 100, 1000]
+        currencyCosts: DEFAULT_COST,
+        scoreCosts: DEFAULT_COST
       }
     },
     styles: {
@@ -38,22 +69,22 @@ export default class App extends Component {
         id: 'hat',
         name: 'Hat',
         level: 1,
-        currencyCosts: [1, 2, 5, 10, 20, 50, 100, 1000],
-        scoreCosts: [1, 2, 5, 10, 20, 50, 100, 1000]
+        currencyCosts: DEFAULT_COST,
+        scoreCosts: DEFAULT_COST
       },
       cigar: {
         id: 'cigar',
         name: 'Cigar',
         level: 1,
-        currencyCosts: [1, 2, 5, 10, 20, 50, 100, 1000],
-        scoreCosts: [1, 2, 5, 10, 20, 50, 100, 1000]
+        currencyCosts: DEFAULT_COST,
+        scoreCosts: DEFAULT_COST
       },
       pants: {
         id: 'pants',
         name: 'Pants',
         level: 1,
-        currencyCosts: [1, 2, 5, 10, 20, 50, 100, 1000],
-        scoreCosts: [1, 2, 5, 10, 20, 50, 100, 1000]
+        currencyCosts: DEFAULT_COST,
+        scoreCosts: DEFAULT_COST
       }
     },
     friends: [
@@ -127,7 +158,17 @@ export default class App extends Component {
   pig;
 
   componentDidMount() {
-    fetch("./api").then((response) => {
+    window.addEventListener('resize', this.handleResize);
+    const context = this.canvas.getContext('2d');
+    this.setState({ context: context });
+    this.background = new Background(this.state)
+    this.pig = new Pig({ context });
+    this.coins = [];
+    requestAnimationFrame(() => this.update());
+  }
+
+  fetchData(user) {
+    fetch(`./api?user=${user}`).then((response) => {
       response.json().then((json) => {
         const newEvents = this.state.events.concat([{
           title: "You've earned interest!",
@@ -144,30 +185,24 @@ export default class App extends Component {
         });
       });
     });
-    window.addEventListener('resize', this.handleResize);
-    const context = this.canvas.getContext('2d');
-    this.setState({ context: context });
-    this.background = new Background(this.state)
-    this.pig = new Pig({ context });
-    this.coins = [];
-    requestAnimationFrame(() => this.update());
   }
 
   saveGame() {
     setTimeout(() => {
+      const flyingCoinsValue = this.state.upgrades.clickPower.level * this.coins.length;
       fetch("./api", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          user: 'john',
-          score: this.state.score,
+          user: this.state.user,
+          score: this.state.score + flyingCoinsValue,
           currency: this.state.currency,
           upgrades: this.state.upgrades,
           styles: this.state.styles
         })
-      })
+      });
     }, 0);
   }
 
@@ -281,11 +316,27 @@ export default class App extends Component {
     requestAnimationFrame(() => this.update());
   }
 
+  handleSetUser = user => {
+    console.log(user)
+    this.setState({ user });
+    this.fetchData(user);
+  }
+
+  renderUserModal() {
+    if (this.state.user) return null;
+    return (
+      <UserSelectModal
+        onSubmit={this.handleSetUser}
+      />
+    );
+  }
+
   render() {
     const modal = (this.state.activeModalEvent && <Modal event={this.state.activeModalEvent} onClose={this.handleEventModalClick}/>) ||
       (this.state.friendsModalOpen && <Modal friends={this.state.friends} onClose={() => this.setState({ friendsModalOpen: false })}/>);
     return (
       <div className="App">
+        {this.renderUserModal()}
         {modal}
         <div className="Score">
           <span>{this.state.score}</span>

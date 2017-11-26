@@ -98,6 +98,7 @@ const ListItem = (props) => {
 
 export default class Bank extends React.Component {
   state = {
+    login: '',
     payments: [],
     investments: MOCK_INVESTMENTS,
     loading: true,
@@ -159,7 +160,7 @@ export default class Bank extends React.Component {
   }
 
   handleBuy = index => {
-    fetch('./api/buy')
+    fetch(`./api/buy?user=${this.state.login}`)
     this.handleOpenModal(index);
   }
 
@@ -263,6 +264,10 @@ export default class Bank extends React.Component {
     );
   }
 
+  handleChange = event => this.setState({ login: event.target.value });
+
+  //handleKeyDown = e => e.keyCode === 13 ? this.props.onSubmit(this.state.text) : null;
+
   render() {
     const buttonTexts = ['Verkkopankki', 'Viestit', 'Asetukset'];
     return (
@@ -272,6 +277,16 @@ export default class Bank extends React.Component {
         </Modal>
         <div className="BankHeader">
           {buttonTexts.map((text, i) => this.renderButton(text, i))}
+          <div className="BankUserSelect">
+            <span>User:</span>
+            <input
+              type="text"
+              value={this.state.login}
+              onChange={this.handleChange}
+              //onKeyDown={this.handleKeyDown}
+            />
+            <button>Login</button>
+          </div>
         </div>
         <div className="BankContainer">
           <BankSection title="Tilitapahtumat">

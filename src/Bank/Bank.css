@@ -141,3 +141,15 @@
 .BankModalBuyButton:active {
   background-color: #cfcfcf;
 }
+
+.BankUserSelect {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 4px;
+  width: calc(100% - 420px)
+}
+
+.BankUserSelect > input {
+  margin: 0 6px;
+}

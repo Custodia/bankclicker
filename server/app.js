@@ -50,6 +50,7 @@ app.get('/api/highscore', (req, res) => {
 app.get('/api/buy', (req, res) => {
   const increment = 1
   const user = req.query.user || 'john';
+	console.log(user)
   let userData = res.getStore().getState().getIn(['users', user])
   if (!userData) {
     res.dispatch({
@@ -66,10 +67,9 @@ app.get('/api/buy', (req, res) => {
 });
 
 app.post('/api', (req, res) => {
-  const user = req.body.user || 'john';
   res.dispatch({
     type: "SAVE",
-    user,
+    user: req.body.user || 'john',
     score: req.body.score,
 		currency: req.body.currency,
     upgrades: req.body.upgrades,
