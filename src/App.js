@@ -104,20 +104,20 @@ export default class App extends Component {
     modalEvent: null,
     displayedEvent: ({
       title: 'Made investment',
-      description: 'lorem ipsum...',
-      coinValue: Math.floor(randomNumBetween(5, 15)),
+      description: 'You made an investment in the online bank which netted you some currency!',
+      coinValue: Math.floor(randomNumBetween(5, 25)),
       currencyValue: Math.floor(randomNumBetween(0, 10))
     }),
     events: [
       {
         title: 'Got interest',
-        description: 'lorem ipsum...',
-        coinValue: Math.floor(randomNumBetween(5, 15)),
+        description: "You earned interest from your investments! Have a gift!",
+        coinValue: Math.floor(randomNumBetween(5, 35)),
         currencyValue: Math.floor(randomNumBetween(0, 10))
       },
       {
         title: 'Friend level upped',
-        description: 'lorem ipsum...',
+        description: 'Your friend just level upped! Check their pig at the friends tab!',
         coinValue: Math.floor(randomNumBetween(5, 15)),
         currencyValue: Math.floor(randomNumBetween(0, 10))
       }
@@ -131,7 +131,7 @@ export default class App extends Component {
       response.json().then((json) => {
         const newEvents = this.state.events.concat([{
           title: "You've earned interest!",
-          description: "You're investments have earned interest, here's your daily bonus!",
+          description: "Your investments have earned interest, here's your daily bonus!",
           coinValue: 100,
           currencyValue: json.increment
         }]);
@@ -251,7 +251,7 @@ export default class App extends Component {
       activeModalEvent: this.state.displayedEvent
     });
   }
-  
+
   handleFriendsModalOpen = () => {
     this.setState({ friendsModalOpen: true });
   }

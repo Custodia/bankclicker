@@ -72,7 +72,6 @@ app.post('/api', (req, res) => {
     user,
     score: req.body.score,
 		currency: req.body.currency,
-    increment: req.body.increment,
     upgrades: req.body.upgrades,
     styles: req.body.styles
   });

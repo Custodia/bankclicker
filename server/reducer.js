@@ -45,7 +45,7 @@ var reducer = function(state, action) {
     case 'SAVE': {
       return state.setIn(['users', action.user], Map({
         score: action.score,
-        increment: action.increment,
+        increment: 0,
         currency: action.currency,
         upgrades: action.upgrades,
         styles: action.styles
